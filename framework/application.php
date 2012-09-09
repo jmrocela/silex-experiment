@@ -87,7 +87,7 @@ foreach ($routes as $route) {
     })
     ->convert($convert_name, function($param) use ($api, $route) {
 		// convert the parameter if the converter is available
-		if (is_array($route['converter'])) {
+		if (isset($route['converter'])) {
 			if ($callback = $route['converter']['callback']) {
 				$param = call_user_func_array($callback, array($param));
 			} else {
