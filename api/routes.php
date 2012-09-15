@@ -7,17 +7,19 @@
  * - make sure the URL reads semantically
  */
 return array(
-	array(
-		'name' => null, // named routes
-		'pattern' => '/user/{param1}/get', // route
-		'path' => 'Index/Index', // controller
-		'method' => array('get', 'post'), 
-		'converter' => null,
-		'locale' => null, // defaults to site config
-		'format' => 'json', // return format for the request, defaults to whatever is in http-accept
-		// Implement this in the future
-		'defaults' => array(),
-		'asserts' => array(),
+	WWW_HOST_PATH => array(),
+	API_HOST_PATH => array(
+		array(
+			'name' => null, // named routes
+			'pattern' => '/', // route
+			'path' => 'Index/Index', // controller
+			'method' => array('get', 'post'), 
+			'accept' => 'json', // return format for the request, defaults to whatever is in http-accept
+			'locale' => null, // defaults to site config
+			// Implement this in the future
+			'defaults' => array(),
+			'converter' => null,
+			'asserts' => array()
+		)
 	)
-
 );

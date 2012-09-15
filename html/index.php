@@ -19,15 +19,11 @@ require_once FRAMEWORK_DIR . 'constants.php';
 require_once FRAMEWORK_DIR . DS . 'vendor' . DS . 'autoload.php';
 
 // Make some magic
-$api = new Silex\Application();
-$api['security.firewalls'] = array();
+$app = new Silex\Application();
 
 // Require the bootstrapper
 require_once FRAMEWORK_DIR . 'application.php';
 
-// Mount v1 API to the /v1 namespace
-$api->mount('/1', $v1);
-
 // Run it
-$api->run();
+$app->run();
 // --- EOF
