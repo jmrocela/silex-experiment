@@ -7,19 +7,29 @@
  * - make sure the URL reads semantically
  */
 return array(
-	WWW_HOST_PATH => array(),
-	API_HOST_PATH => array(
-		array(
-			'name' => null, // named routes
-			'pattern' => '/', // route
-			'path' => 'Index/Index', // controller
-			'method' => array('get', 'post'), 
-			'accept' => 'json', // return format for the request, defaults to whatever is in http-accept
-			'locale' => null, // defaults to site config
-			// Implement this in the future
-			'defaults' => array(),
-			'converter' => null,
-			'asserts' => array()
-		)
+	WWW_HOST => array(
+		'prefix' => WWW_HOST_PATH,
+		'routes' => array(
+				array('pattern' => '/', 'path' => 'Frontend/Index', 'method' => 'get')
+			)
+	),
+
+	API_HOST => array(
+		'prefix' => API_HOST_PATH,
+		'routes' => array(
+				array(
+					'name' => null, // named routes
+					'pattern' => '/', // route
+					'path' => 'Frontend/Index', // controller
+					'method' => array('get', 'post'), 
+					'accept' => 'json', // return format for the request, defaults to whatever is in http-accept
+					'locale' => null, // defaults to site config
+					'template' => null, // defaults to the template under the same namespace
+					// Implement this in the future
+					'defaults' => array(),
+					'converter' => null,
+					'asserts' => array()
+				)
+			)
 	)
 );

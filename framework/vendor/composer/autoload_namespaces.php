@@ -6,7 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Twig_' => $vendorDir . '/twig/twig/lib/',
+    'Symfony\\Component\\Yaml' => $vendorDir . '/symfony/yaml/',
     'Symfony\\Component\\Validator' => $vendorDir . '/symfony/validator/',
     'Symfony\\Component\\Translation' => $vendorDir . '/symfony/translation/',
     'Symfony\\Component\\Security' => $vendorDir . '/symfony/security/',
@@ -17,10 +17,13 @@ return array(
     'Symfony\\Component\\HttpFoundation' => $vendorDir . '/symfony/http-foundation/',
     'Symfony\\Component\\Form' => $vendorDir . '/symfony/form/',
     'Symfony\\Component\\EventDispatcher' => $vendorDir . '/symfony/event-dispatcher/',
+    'Symfony\\Component\\Console' => $vendorDir . '/symfony/console/',
     'Silex' => $vendorDir . '/silex/silex/src/',
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs',
     'Pimple' => $vendorDir . '/pimple/pimple/lib/',
+    'Mustache' => $vendorDir . '/mustache/mustache/src/',
     'Monolog' => $vendorDir . '/monolog/monolog/src/',
+    'Doctrine\\MongoDB' => $vendorDir . '/doctrine/mongodb/lib/',
     'Doctrine\\DBAL' => $vendorDir . '/doctrine/dbal/lib/',
     'Doctrine\\Common' => $vendorDir . '/doctrine/common/lib/',
 );

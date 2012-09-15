@@ -19,12 +19,6 @@ define('WWW_HOST', 'www.sprintport.local');
 define('WWW_HOST_PATH', '/');
 define('CDN_HOST', 'a1.cdn-sprintport.local');
 
-// Email
-define('SMTP_HOST', '');
-define('SMTP_USERNAME', '');
-define('SMTP_PASSWORD', '');
-define('SMTP_PORT', '');
-
 // Database
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'sprintportdb');
@@ -35,5 +29,8 @@ define('MONGODB_HOST', 'localhost');
 define('MONGODB_NAME', 'sprintportdb');
 define('MONGODB_USERNAME', 'root');
 define('MONGODB_PASSWORD', '');
+
+// CONSTANTS
+define('DEFAULT_CONTENT_TYPE', 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8');
 
 // --- EOF

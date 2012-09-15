@@ -33,3 +33,9 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
 // register our mongodb database
 require_once FRAMEWORK_DIR . 'providers' . DS . 'MongoDBServiceProvider.php';
 $app->register(new MongoDBServiceProvider());
+
+// register our mustache provider
+require_once FRAMEWORK_DIR . 'providers' . DS . 'MustacheServiceProvider.php';
+$app->register(new MustacheServiceProvider(), array(
+        'mustache.path' => TEMPLATE_DIR
+    ));

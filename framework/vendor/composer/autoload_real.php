@@ -24,8 +24,6 @@ class ComposerAutoloaderInit
 
         $loader->register();
 
-        require $vendorDir . '/swiftmailer/swiftmailer/lib/swift_required.php';
-
         return $loader;
     }
 }
