@@ -19,16 +19,14 @@ define('WWW_HOST', 'sprintport.local');
 define('WWW_HOST_PATH', '/');
 define('CDN_HOST', 'a1.cdn-sprintport.local');
 
+// Session
+define('SESSION_NAME', 'SPRPORT');
+
 // Database
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'sprintportdb');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
-
-define('MONGODB_HOST', 'localhost');
-define('MONGODB_NAME', 'sprintportdb');
-define('MONGODB_USERNAME', 'root');
-define('MONGODB_PASSWORD', '');
 
 // CONSTANTS
 define('DEFAULT_CONTENT_TYPE', 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8');

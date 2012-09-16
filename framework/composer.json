@@ -2,10 +2,13 @@
     "minimum-stability": "dev",
     "require": {
         "silex/silex": "1.0.*",
-		"doctrine/dbal": "2.2.*",
-		"doctrine/mongodb": "*",
+		
+		"doctrine/mongodb": "dev-master",
+		"doctrine/mongodb-odm": "dev-master",
+		
 		"monolog/monolog": ">=1.0.0",
 		"mustache/mustache": "dev-master",
+		
 		"symfony/security": "2.1.*",
 		"symfony/translation": "2.1.*",
 		"symfony/validator": "2.1.*",

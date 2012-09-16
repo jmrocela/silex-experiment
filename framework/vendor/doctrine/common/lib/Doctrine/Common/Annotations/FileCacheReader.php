@@ -13,7 +13,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * This software consists of voluntary contributions made by many individuals
- * and is licensed under the LGPL. For more information, see
+ * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
 
@@ -32,10 +32,33 @@ class FileCacheReader implements Reader
      * @var Reader
      */
     private $reader;
+
+    /**
+     * @var string
+     */
     private $dir;
+
+    /**
+     * @var bool
+     */
     private $debug;
+
+    /**
+     * @var array
+     */
     private $loadedAnnotations = array();
 
+    private $classNameHashes = array();
+
+    /**
+     * Constructor
+     *
+     * @param Reader $reader
+     * @param string $cacheDir
+     * @param bool $debug
+     *
+     * @throws \InvalidArgumentException
+     */
     public function __construct(Reader $reader, $cacheDir, $debug = false)
     {
         $this->reader = $reader;
@@ -50,9 +73,18 @@ class FileCacheReader implements Reader
         $this->debug = $debug;
     }
 
+    /**
+     * Retrieve annotations for class
+     *
+     * @param \ReflectionClass $class
+     * @return array
+     */
     public function getClassAnnotations(\ReflectionClass $class)
     {
-        $key = $class->getName();
+        if ( ! isset($this->classNameHashes[$class->name])) {
+            $this->classNameHashes[$class->name] = sha1($class->name);
+        }
+        $key = $this->classNameHashes[$class->name];
 
         if (isset($this->loadedAnnotations[$key])) {
             return $this->loadedAnnotations[$key];
@@ -78,10 +110,19 @@ class FileCacheReader implements Reader
         return $this->loadedAnnotations[$key] = include $path;
     }
 
+    /**
+     * Get annotations for property
+     *
+     * @param \ReflectionProperty $property
+     * @return array
+     */
     public function getPropertyAnnotations(\ReflectionProperty $property)
     {
         $class = $property->getDeclaringClass();
-        $key = $class->getName().'$'.$property->getName();
+        if ( ! isset($this->classNameHashes[$class->name])) {
+            $this->classNameHashes[$class->name] = sha1($class->name);
+        }
+        $key = $this->classNameHashes[$class->name].'$'.$property->getName();
 
         if (isset($this->loadedAnnotations[$key])) {
             return $this->loadedAnnotations[$key];
@@ -107,10 +148,19 @@ class FileCacheReader implements Reader
         return $this->loadedAnnotations[$key] = include $path;
     }
 
+    /**
+     * Retrieve annotations for method
+     *
+     * @param \ReflectionMethod $method
+     * @return array
+     */
     public function getMethodAnnotations(\ReflectionMethod $method)
     {
         $class = $method->getDeclaringClass();
-        $key = $class->getName().'#'.$method->getName();
+        if ( ! isset($this->classNameHashes[$class->name])) {
+            $this->classNameHashes[$class->name] = sha1($class->name);
+        }
+        $key = $this->classNameHashes[$class->name].'#'.$method->getName();
 
         if (isset($this->loadedAnnotations[$key])) {
             return $this->loadedAnnotations[$key];
@@ -136,6 +186,12 @@ class FileCacheReader implements Reader
         return $this->loadedAnnotations[$key] = include $path;
     }
 
+    /**
+     * Save cache file
+     *
+     * @param string $path
+     * @param mixed $data
+     */
     private function saveCacheFile($path, $data)
     {
         file_put_contents($path, '<?php return unserialize('.var_export(serialize($data), true).');');
@@ -144,10 +200,11 @@ class FileCacheReader implements Reader
     /**
      * Gets a class annotation.
      *
-     * @param ReflectionClass $class The ReflectionClass of the class from which
+     * @param \ReflectionClass $class The ReflectionClass of the class from which
      *                               the class annotations should be read.
      * @param string $annotationName The name of the annotation.
-     * @return The Annotation or NULL, if the requested annotation does not exist.
+     *
+     * @return mixed The Annotation or NULL, if the requested annotation does not exist.
      */
     public function getClassAnnotation(\ReflectionClass $class, $annotationName)
     {
@@ -165,9 +222,9 @@ class FileCacheReader implements Reader
     /**
      * Gets a method annotation.
      *
-     * @param ReflectionMethod $method
+     * @param \ReflectionMethod $method
      * @param string $annotationName The name of the annotation.
-     * @return The Annotation or NULL, if the requested annotation does not exist.
+     * @return mixed The Annotation or NULL, if the requested annotation does not exist.
      */
     public function getMethodAnnotation(\ReflectionMethod $method, $annotationName)
     {
@@ -185,9 +242,9 @@ class FileCacheReader implements Reader
     /**
      * Gets a property annotation.
      *
-     * @param ReflectionProperty $property
+     * @param \ReflectionProperty $property
      * @param string $annotationName The name of the annotation.
-     * @return The Annotation or NULL, if the requested annotation does not exist.
+     * @return mixed The Annotation or NULL, if the requested annotation does not exist.
      */
     public function getPropertyAnnotation(\ReflectionProperty $property, $annotationName)
     {
@@ -202,6 +259,9 @@ class FileCacheReader implements Reader
         return null;
     }
 
+    /**
+     * Clear stores annotations
+     */
     public function clearLoadedAnnotations()
     {
         $this->loadedAnnotations = array();

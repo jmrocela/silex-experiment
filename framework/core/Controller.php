@@ -27,8 +27,7 @@ class Controller {
 	{
 		$this->session = $app['session'];
 		$this->log = $app['monolog'];
-		$this->db = $app['dbs']['db_main_mysql'];
-		$this->mongo = $app['mongodb'];
+		$this->mongo = $app['mongo'];
 		$this->mustache = $app['mustache'];
 	}
 

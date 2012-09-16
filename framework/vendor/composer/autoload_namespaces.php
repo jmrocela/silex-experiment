@@ -23,7 +23,7 @@ return array(
     'Pimple' => $vendorDir . '/pimple/pimple/lib/',
     'Mustache' => $vendorDir . '/mustache/mustache/src/',
     'Monolog' => $vendorDir . '/monolog/monolog/src/',
+    'Doctrine\\ODM\\MongoDB' => $vendorDir . '/doctrine/mongodb-odm/lib/',
     'Doctrine\\MongoDB' => $vendorDir . '/doctrine/mongodb/lib/',
-    'Doctrine\\DBAL' => $vendorDir . '/doctrine/dbal/lib/',
     'Doctrine\\Common' => $vendorDir . '/doctrine/common/lib/',
 );
