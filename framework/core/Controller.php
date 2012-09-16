@@ -3,6 +3,7 @@
 namespace Solar;
  
 // use some symfony stuff
+use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -20,6 +21,15 @@ class Controller {
 	public function after(Request $request, Response $response)
 	{
 		return $response;
+	}
+
+	public function apply(Application $app)
+	{
+		$this->session = $app['session'];
+		$this->log = $app['monolog'];
+		$this->db = $app['dbs']['db_main_mysql'];
+		$this->mongo = $app['mongodb'];
+		$this->mustache = $app['mustache'];
 	}
 
 	public function render($template, Response $response)

@@ -28,7 +28,7 @@ foreach ($routes as $site => $handles) {
 		foreach ($handles['routes'] as $route) {
 
 			// check if the 3 required fields are there. else, let's throw an error
-			$route['method'] = (isset($route['method'])) ? $route['method']: 'get';
+			$route['method'] = (isset($route['method'])) ? $route['method']: array('get', 'post');
 
 		    // apply method
 		    $method = (is_array($route['method'])) ? strtoupper(implode('|', $route['method'])): $route['method'];
@@ -68,7 +68,7 @@ foreach ($routes as $site => $handles) {
 				$route_handle = $controller[0] . 'Controller';
 				$app->method = $controller[1];
 				
-				// i have the power!
+				// I have the power!
 				$app->handle = new $route_handle();
 				
 				// execute the before handler if there is
@@ -80,11 +80,7 @@ foreach ($routes as $site => $handles) {
 				
 				// attach some traits
 				$app->handle->request = $request;
-				$app->handle->session = $app['session'];
-				$app->handle->log = $app['monolog'];
-				$app->handle->db = $app['dbs']['db_main_mysql'];
-				$app->handle->mongo = $app['mongodb'];
-				$app->handle->mustache = $app['mustache'];
+				$app->handle->apply($app);
 		    })
 		    ->after(function(Request $request, Response $response) use ($app, $route) {	
 		    	// get the accepted content type
@@ -164,11 +160,18 @@ $app->error(function (\Exception $e, $code) use($app) {
 	    }
 
 	} else {
+		$controller = new FrontendController();
+				
+		// execute the handlers
+		$request = $controller->before(new Request());
+		$controller->accept = $request->headers->get('Accept');
+		$controller->apply($app);
+		$response = new Response($controller->fourohfour());
+		$response = $controller->after($request, $response);
 
+		// load our 404 template. we don't need anything else actually
 		$template = require_once TEMPLATE_DIR . '404.ms';
-		$rendered = $app['mustache']->render($template, array(
-				'message' => $e
-			));
+		$rendered = $controller->render($template, $response);
 		return new Response($rendered, $code);
 
 	}
