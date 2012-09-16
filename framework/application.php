@@ -87,24 +87,30 @@ foreach ($routes as $site => $handles) {
 				$app->handle->mustache = $app['mustache'];
 		    })
 		    ->after(function(Request $request, Response $response) use ($app, $route) {	
-
-		    	// where are our templates located?
-		    	$template = (!empty($route['template'])) ? $route['template']: str_replace('controller', '', strtolower(get_class($app->handle))) . DS . strtolower($app->method) . '.ms';
-				if (file_exists(TEMPLATE_DIR . $template)) {
-					$template = require_once TEMPLATE_DIR . $template;
-				} else {
-					throw new \Exception('Template "' . $template . '" could not be found. Make sure the template exists under ' . TEMPLATE_DIR);
-				}
+		    	// get the accepted content type
+				$content_type = ($app->handle->accept) ? $app->handle->accept: DEFAULT_CONTENT_TYPE;
 
 				// execute the after handler if there is
 				$response = $app->handle->after($request, $response);
 
-		    	// generate the rendered template
-				$rendered = $app->handle->render($template, $response);
+		    	// where are our templates located?
+		    	if ($content_type == DEFAULT_CONTENT_TYPE) {
+			    	$template = (!empty($route['template'])) ? $route['template']: str_replace('controller', '', strtolower(get_class($app->handle))) . DS . strtolower($app->method) . '.ms';
+					if (file_exists(TEMPLATE_DIR . $template)) {
+						$template = require_once TEMPLATE_DIR . $template;
+					} else {
+						throw new \Exception('Template "' . $template . '" could not be found. Make sure the template exists under ' . TEMPLATE_DIR);
+					}
+			    	// generate the rendered template
+					$rendered = $app->handle->render($template, $response);
 
-				// return the response
-				$content_type = ($app->handle->accept) ? $app->handle->accept: DEFAULT_CONTENT_TYPE;
-				return new Response($rendered, 200,  array('content-type' => $content_type));
+					// return the response
+					return new Response($rendered, 200,  array('content-type' => $content_type));
+				} else {
+					// return the response
+					return new Response($response->getContent(), 200,  array('content-type' => $content_type));
+				}
+
 		    })
 		    ->convert($convert_name, function($param) use ($app, $route) {
 				// convert the parameter if the converter is available
@@ -128,26 +134,44 @@ foreach ($routes as $site => $handles) {
 // error handler
 $app->error(function (\Exception $e, $code) use($app) {
 
-	$debug = null;
 	if (API_DEBUG) {
 		$app['monolog']->addDebug($e);
-		$debug = "\n\n" . $e;
 	}
 
-    switch ($code) {
-		case 500:
-			return new Response(json_encode(array('type' => 'SprintGenericError', 'error' => 'There seems to be a problem with our Code. Don\'t worry, we are working on this right now.' . $debug, 'code' => $code)), $code, array('content-type' => 'application/json'));
-		break;
-        case 405:
-			return new Response(json_encode(array('type' => 'SprintGenericError', 'error' => 'Method is not allowed. Please refer to our Documenation at http://springload.com/api/docs/' . $debug, 'code' => $code)), $code, array('content-type' => 'application/json'));
-		break;
-        case 404:
-			return new Response(json_encode(array('type' => 'SprintGenericError', 'error' => 'You cannot access this URL directly. The namespace and action does not exist. Please refer to our Documenation at http://springload.com/api/docs/' . $debug, 'code' => $code)), $code, array('content-type' => 'application/json'));
-		break;
-        case 403:
-			return new Response(json_encode(array('type' => 'SprintGenericError', 'error' => 'You are unauthorized to perform this action. Please make sure your API key and API secret is valid.' . $debug, 'code' => $code)), $code, array('content-type' => 'application/json'));
-		break;
-    }
+	// see if we are in
+	if ($_SERVER['SERVER_NAME'] == API_HOST) {
+		
+		// just for debugging purposes
+		$debug = null;
+		if (API_DEBUG) {
+			$debug = "\n\n" . $e;
+		}
+
+		// switch through error codes
+    	switch ($code) {
+			case 500:
+				return new Response(json_encode(array('type' => 'SprintGenericError', 'error' => 'There seems to be a problem with our Code. Don\'t worry, we are working on this right now.' . $debug, 'code' => $code)), $code, array('content-type' => 'application/json'));
+			break;
+	        case 405:
+				return new Response(json_encode(array('type' => 'SprintGenericError', 'error' => 'Method is not allowed. Please refer to our Documenation at http://springload.com/api/docs/' . $debug, 'code' => $code)), $code, array('content-type' => 'application/json'));
+			break;
+	        case 404:
+				return new Response(json_encode(array('type' => 'SprintGenericError', 'error' => 'You cannot access this URL directly. The namespace and action does not exist. Please refer to our Documenation at http://springload.com/api/docs/' . $debug, 'code' => $code)), $code, array('content-type' => 'application/json'));
+			break;
+	        case 403:
+				return new Response(json_encode(array('type' => 'SprintGenericError', 'error' => 'You are unauthorized to perform this action. Please make sure your API key and API secret is valid.' . $debug, 'code' => $code)), $code, array('content-type' => 'application/json'));
+			break;
+	    }
+
+	} else {
+
+		$template = require_once TEMPLATE_DIR . '404.ms';
+		$rendered = $app['mustache']->render($template, array(
+				'message' => $e
+			));
+		return new Response($rendered, $code);
+
+	}
 });
 
 // register our autoloader

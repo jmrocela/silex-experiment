@@ -15,7 +15,7 @@ define('API_DEBUG', true);
 // Domains
 define('API_HOST', 'api.sprintport.local');
 define('API_HOST_PATH', '/v1');
-define('WWW_HOST', 'www.sprintport.local');
+define('WWW_HOST', 'sprintport.local');
 define('WWW_HOST_PATH', '/');
 define('CDN_HOST', 'a1.cdn-sprintport.local');
 

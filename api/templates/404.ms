@@ -9,11 +9,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width">
-  <title>Sprintport. Make Travel Social.</title>
+  <title>This is not the page you are looking for</title>
 <body>
 
 
-Just for the Homepage
+404 page
 
 
 </body>

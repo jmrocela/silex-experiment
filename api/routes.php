@@ -20,7 +20,7 @@ return array(
 				array(
 					'name' => null, // named routes
 					'pattern' => '/', // route
-					'path' => 'Frontend/Index', // controller
+					'path' => 'Index/Index', // controller
 					'method' => array('get', 'post'), 
 					'accept' => 'json', // return format for the request, defaults to whatever is in http-accept
 					'locale' => null, // defaults to site config

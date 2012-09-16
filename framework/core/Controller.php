@@ -8,15 +8,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class Controller {
 
-	public function __construct()
-	{
-	
-	}
+	public function __construct() {}
 
-	public function __destruct()
-	{
-	
-	}
+	public function __destruct() {}
 
 	public function before(Request $request)
 	{
@@ -34,9 +28,17 @@ class Controller {
 	}
 
 	protected function _render($template, Response $response)
-	{
-		$rendered = $this->mustache->render($template, $response);	
-		return $rendered;
+	{	
+		$response = $response->getContent();
+		/**
+		 * if lazy is on, just return the response as json or
+		 * else, we do nothing and render the whole page as html.
+		 */
+		if ($this->accept == DEFAULT_CONTENT_TYPE) {
+			return $this->mustache->render($template, json_decode($response));
+		} else {
+			return $response;
+		}
 	}
 
 }

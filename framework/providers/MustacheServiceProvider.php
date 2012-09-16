@@ -9,8 +9,6 @@ class MustacheServiceProvider implements ServiceProviderInterface {
 
     public function register(Application $app)
     {
-        $app['mustache.path'] = array();
-
         $app['mustache'] = $app->share(function ($app) {
             return new Mustache_Engine();
         });
