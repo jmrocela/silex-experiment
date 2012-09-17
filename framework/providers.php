@@ -28,6 +28,7 @@ $app['session.storage.handler'] = $app->share(function () use ($app) {
                 'db_table' => 'sessions'
             ));
     });
+$app['session']->start();
 
 // register our logging service
 $app->register(new Silex\Provider\MonologServiceProvider(), array(

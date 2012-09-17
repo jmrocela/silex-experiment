@@ -57,8 +57,7 @@ class MongoDBServiceProvider implements ServiceProviderInterface
             $config->setHydratorNamespace('Hydrators');
 
             AnnotationDriver::registerAnnotationClasses();
-
-            $config->setMetadataDriverImpl(new AnnotationDriver($app['mongo.common.documents_dir']));
+            $config->setMetadataDriverImpl(AnnotationDriver::create($app['mongo.common.documents_dir']));
 
             $loader = \ComposerAutoloaderInit::getLoader();
 

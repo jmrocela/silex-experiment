@@ -24,7 +24,7 @@ define('SESSION_NAME', 'SPRPORT');
 
 // Database
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'sprintportdb');
+define('DB_NAME', 'sprintport');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
 

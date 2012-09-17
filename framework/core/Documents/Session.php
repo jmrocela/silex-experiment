@@ -1,10 +1,22 @@
 <?php
 
 namespace Documents;
+use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 
+/**
+ * @ODM\Document(collection="sessions")
+ */
 class Session {
 
-	/** @Id */
+    /** @ODM\Id */
+    private $id;
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+	/** @ODM\Field(type="string") */
     private $sess_id;
 
     public function setSessId($val = null)
@@ -17,7 +29,7 @@ class Session {
     	return $this->sess_id;
     }
 
-    /** @String */
+    /** @ODM\Field(type="string") */
     private $sess_data;
 
     public function setSessData($val = null)
@@ -30,7 +42,7 @@ class Session {
     	return $this->sess_data;
     }
 
-    /** @String */
+    /** @ODM\Field(type="string") */
     private $sess_time;
 
     public function setSessTime($val = null)

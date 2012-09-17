@@ -2,8 +2,6 @@
 
 namespace Solar;
 
-use Documents\Session;
-
 class SessionHandler implements \SessionHandlerInterface {
     /**
      * @var Doctrine\MongoDB\Connection instance.
@@ -24,9 +22,6 @@ class SessionHandler implements \SessionHandlerInterface {
             'data_col' => 'sess_data',
             'time_col' => 'sess_time',
         ), $options);
-
-        // we create an instance of the Session Document
-        $this->session = new Session();
     }
 
     /**
@@ -48,21 +43,64 @@ class SessionHandler implements \SessionHandlerInterface {
     /**
      * {@inheritDoc}
      */
-    public function read($key) {}
-
-    /**
-     * {@inheritDoc}
-     */
-    public function write($key, $val) {}
-
-    /**
-     * {@inheritDoc}
-     */
-    public function destroy($key) {
+    public function read($key) 
+    {
         try {
-            $this->db->getRepository('Documents\Session')->findBy(array('sess_id' => $key));
-        } catch (\PDOException $e) {
-            throw new \RuntimeException(sprintf('PDOException was thrown when trying to manipulate session data: %s', $e->getMessage()), 0, $e);
+            $session = $this->db->createQueryBuilder('\Documents\Session')->field('sess_id')->equals($key)->getQuery()->getSingleResult();
+            if ($session = base64_decode($session)) {
+                return $session;
+            }
+
+            $this->create($key);
+            return '';
+        } catch (\Exception $e) {
+            throw new \RuntimeException(sprintf('Exception was thrown when trying to read the session data: %s', $e->getMessage()), 0, $e);
+        }
+
+        return true;
+    }
+
+    public function create($key, $data = '')
+    {
+        $session = new \Documents\Session();
+        $session->setSessId($key);
+        $session->setSessData(base64_encode($data));
+        $session->setSessTime(time());
+
+        $this->db->persist($session);
+        $this->db->flush();
+
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function write($key, $data) 
+    {
+        //session data can contain non binary safe characters so we need to encode it
+        $encoded = base64_encode($data);
+
+        try {
+            $session = $this->db->createQueryBuilder('\Documents\Session')->field('sess_id')->equals($key)->getQuery()->getSingleResult();
+
+            if (!$session) {
+                $this->create($key, $data);
+            }
+        } catch (\Exception $e) {
+                throw new \RuntimeException(sprintf('Exception was thrown when trying to write the session data: %s', $e->getMessage()), 0, $e);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function destroy($key) 
+    {
+        try {
+            $this->db->createQueryBuilder('\Documents\Session')->remove()->field('sess_id')->equals($key)->getQuery()->execute();
+        } catch (\Exception $e) {
+            throw new \RuntimeException(sprintf('Exception was thrown when trying to manipulate session data: %s', $e->getMessage()), 0, $e);
         }
 
         return true;
@@ -71,6 +109,15 @@ class SessionHandler implements \SessionHandlerInterface {
     /**
      * {@inheritDoc}
      */
-    public function gc($maxlifetime) {}
+    public function gc($maxlifetime) 
+    {
+        try {
+            $this->db->createQueryBuilder('\Documents\Session')->remove()->field('sess_time')->lt($maxlifetime)->getQuery()->execute();
+        } catch (\Exception $e) {
+            throw new \RuntimeException(sprintf('Exception was thrown when trying to manipulate session data: %s', $e->getMessage()), 0, $e);
+        }
+
+        return true;
+    }
 
 }
