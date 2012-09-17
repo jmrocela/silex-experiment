@@ -25,6 +25,7 @@ class SessionHandler implements \SessionHandlerInterface {
             'time_col' => 'sess_time',
         ), $options);
 
+        // we create an instance of the Session Document
         $this->session = new Session();
     }
 
@@ -57,7 +58,15 @@ class SessionHandler implements \SessionHandlerInterface {
     /**
      * {@inheritDoc}
      */
-    public function destroy($key) {}
+    public function destroy($key) {
+        try {
+            $this->db->getRepository('Documents\Session')->findBy(array('sess_id' => $key));
+        } catch (\PDOException $e) {
+            throw new \RuntimeException(sprintf('PDOException was thrown when trying to manipulate session data: %s', $e->getMessage()), 0, $e);
+        }
+
+        return true;
+    }
 
     /**
      * {@inheritDoc}

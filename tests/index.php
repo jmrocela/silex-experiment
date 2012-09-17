@@ -3,13 +3,13 @@
 // Set these to what you require
 
 // Path to PHPUnit_Html or null if include path 
-$config['phpunit_html'] = '../../';
+$config['phpunit_html'] = null;
 
 // Path to PHPUnit or null if include path (ie. /usr/local/php/PEAR/PHPUnit/)
 $config['phpunit'] = null;
 
 // Name of template to use
-$config['template'] = 'default';
+$config['template'] = 'bootstrap';
 
 // Test to run (or null to run all tests in current directory)
 $config['test'] = null;
