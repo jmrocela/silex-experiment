@@ -33,9 +33,9 @@ class Session {
     /** @String */
     private $sess_time;
 
-    public function setSessTime($val = time())
+    public function setSessTime($val = null)
     {
-    	$this->sess_time = $val;
+    	$this->sess_time = ($val == null) ? time(): $val;
     }
 
     public function getSessTime()

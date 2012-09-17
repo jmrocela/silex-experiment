@@ -25,17 +25,20 @@ class MongoDBServiceProvider implements ServiceProviderInterface
 {
     public function register(Application $app)
     {
-        $app['mongo.options'] = array_replace(array(
-            'dbname'   => null
-        ), isset($app['mongo.options']) ? $app['mongo.options'] : array());
 
         $app['mongo'] = $app->share(function ($app) {
+
+            $app['mongo.options'] = array_replace(array(
+                'dbname'   => null
+            ), isset($app['mongo.options']) ? $app['mongo.options'] : array());
+
             return DocumentManager::create(
                 new Connection(
                     isset($app['mongo.options']['server']) ? $app['mongo.options']['server'] : null
                 ),
                 $app['mongo.config']
             );
+
         });
 
         $app['mongo.config'] = $app->share(function ($app) {
@@ -56,24 +59,27 @@ class MongoDBServiceProvider implements ServiceProviderInterface
 
             $config->setMetadataDriverImpl(new AnnotationDriver($app['mongo.common.documents_dir']));
 
+            require_once FRAMEWORK_DIR . 'vendor' . DS . 'autoload.php';
+            $loader = \ComposerAutoloaderInit::getLoader();
+
+            if (isset($app['mongo.common.class_path'])) {
+                $loader->add('Doctrine\\Common', $app['mongo.common.class_path']);
+            }
+
+            if (isset($app['mongo.mongodb.class_path'])) {
+                $loader->add('Doctrine\\MongoDB', $app['mongo.mongodb.class_path']);
+            }
+
+            if (isset($app['mongo.mongodbodm.class_path'])) {
+                $loader->add('Doctrine\ODM\MongoDB', $app['mongo.mongodbodm.class_path']);
+            }
+            if (isset($app['mongo.common.documents_dir'])) {
+                $loader->add('Documents', $app['mongo.common.documents_dir']);
+            }
+
             return $config;
 
         });
-
-        if (isset($app['mongo.common.class_path'])) {
-            $app['autoloader']->registerNamespace('Doctrine\\Common', $app['mongo.common.class_path']);
-        }
-
-        if (isset($app['mongo.mongodb.class_path'])) {
-            $app['autoloader']->registerNamespace('Doctrine\\MongoDB', $app['mongo.mongodb.class_path']);
-        }
-
-        if (isset($app['mongo.mongodbodm.class_path'])) {
-            $app['autoloader']->registerNamespace('Doctrine\ODM\MongoDB', $app['mongo.mongodbodm.class_path']);
-        }
-        if (isset($app['mongo.common.documents_dir'])) {
-            $app['autoloader']->registerNamespace('Documents', $app['mongo.common.documents_dir']);
-        }
     }
 
     public function boot(Application $app) {}
