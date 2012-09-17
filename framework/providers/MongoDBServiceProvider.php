@@ -19,6 +19,7 @@ use Doctrine\Common\Annotations\AnnotationReader,
  * Doctrine ODM (MongoDB) extension for the Silex framework. 
  * 
  * @author Dmitry Rodin (madiedinro@gmail.com)
+ * @author John Rocela (me@iamjamoy.com)
  * 
  */
 class MongoDBServiceProvider implements ServiceProviderInterface
@@ -59,7 +60,6 @@ class MongoDBServiceProvider implements ServiceProviderInterface
 
             $config->setMetadataDriverImpl(new AnnotationDriver($app['mongo.common.documents_dir']));
 
-            require_once FRAMEWORK_DIR . 'vendor' . DS . 'autoload.php';
             $loader = \ComposerAutoloaderInit::getLoader();
 
             if (isset($app['mongo.common.class_path'])) {

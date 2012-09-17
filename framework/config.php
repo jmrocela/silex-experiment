@@ -28,7 +28,4 @@ define('DB_NAME', 'sprintportdb');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
 
-// CONSTANTS
-define('DEFAULT_CONTENT_TYPE', 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8');
-
 // --- EOF

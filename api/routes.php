@@ -21,7 +21,7 @@ return array(
 					'name' => null, // named routes
 					'pattern' => '/', // route
 					'path' => 'Index/Index', // controller
-					'method' => array('get', 'post'), 
+					'method' => null, 
 					'accept' => 'json', // return format for the request, defaults to whatever is in http-accept
 					'locale' => null, // defaults to site config
 					'template' => null, // defaults to the template under the same namespace

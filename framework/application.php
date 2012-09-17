@@ -28,7 +28,7 @@ foreach ($routes as $site => $handles) {
 		foreach ($handles['routes'] as $route) {
 
 			// check if the 3 required fields are there. else, let's throw an error
-			$route['method'] = (isset($route['method'])) ? $route['method']: array('get', 'post');
+			$route['method'] = (isset($route['method'])) ? $route['method']: array(GET, POST);
 
 		    // apply method
 		    $method = (is_array($route['method'])) ? strtoupper(implode('|', $route['method'])): $route['method'];
