@@ -21,9 +21,11 @@ return array(
     'Silex' => $vendorDir . '/silex/silex/src/',
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs',
     'Pimple' => $vendorDir . '/pimple/pimple/lib/',
+    'Opauth' => $vendorDir . '/opauth/opauth/lib/',
     'Mustache' => $vendorDir . '/mustache/mustache/src/',
     'Monolog' => $vendorDir . '/monolog/monolog/src/',
     'Doctrine\\ODM\\MongoDB' => $vendorDir . '/doctrine/mongodb-odm/lib/',
     'Doctrine\\MongoDB' => $vendorDir . '/doctrine/mongodb/lib/',
     'Doctrine\\Common' => $vendorDir . '/doctrine/common/lib/',
+    '' => array($vendorDir . '/opauth/opauth/lib/Opauth/', $vendorDir . '/opauth/facebook/.', $vendorDir . '/opauth/google/.', $vendorDir . '/opauth/twitter/.'),
 );

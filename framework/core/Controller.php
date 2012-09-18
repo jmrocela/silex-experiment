@@ -43,7 +43,7 @@ class Controller {
 		 * if lazy is on, just return the response as json or
 		 * else, we do nothing and render the whole page as html.
 		 */
-		if ($this->accept == DEFAULT_CONTENT_TYPE) {
+		if ($this->requestFormat == DEFAULT_CONTENT_TYPE) {
 			return $this->mustache->render($template, json_decode($response));
 		} else {
 			return $response;

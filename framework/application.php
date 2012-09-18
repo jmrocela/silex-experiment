@@ -75,7 +75,7 @@ foreach ($routes as $site => $handles) {
 				$request = $app->handle->before($request);
 
 				// get the request accept header
-				$app->handle->accept = (isset($route['accept'])) ? $route['accept']: $request->headers->get('Accept');
+				$app->handle->requestFormat = (isset($route['accept'])) ? $route['accept']: $request->headers->get('Accept');
 				$app->handle->locale = (isset($route['locale'])) ? $route['locale']: null;
 				
 				// attach some traits
@@ -84,7 +84,7 @@ foreach ($routes as $site => $handles) {
 		    })
 		    ->after(function(Request $request, Response $response) use ($app, $route) {	
 		    	// get the accepted content type
-				$content_type = ($app->handle->accept) ? $app->handle->accept: DEFAULT_CONTENT_TYPE;
+				$content_type = ($app->handle->requestFormat) ? $app->handle->requestFormat: DEFAULT_CONTENT_TYPE;
 
 				// execute the after handler if there is
 				$response = $app->handle->after($request, $response);
@@ -164,7 +164,7 @@ $app->error(function (\Exception $e, $code) use($app) {
 				
 		// execute the handlers
 		$request = $controller->before(new Request());
-		$controller->accept = $request->headers->get('Accept');
+		$controller->requestFormat = $request->headers->get('Accept');
 		$controller->apply($app);
 		$response = new Response($controller->fourohfour());
 		$response = $controller->after($request, $response);

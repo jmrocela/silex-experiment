@@ -1,5 +1,5 @@
 {
-    "hash": "ee3fa1a989e11faed2342ff6ba56f496",
+    "hash": "c9ced128b0f69efd030295085dc68a94",
     "packages": [
         {
             "name": "doctrine/common",
@@ -289,6 +289,192 @@
             ]
         },
         {
+            "name": "opauth/facebook",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/uzyn/opauth-facebook.git",
+                "reference": "e5f29ab9c169234120babe5be5ef529cd88a92d9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/uzyn/opauth-facebook/zipball/e5f29ab9c169234120babe5be5ef529cd88a92d9",
+                "reference": "e5f29ab9c169234120babe5be5ef529cd88a92d9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0",
+                "opauth/opauth": ">=0.2.0"
+            },
+            "time": "1342622690",
+            "type": "library",
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "": "."
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "U-Zyn Chua",
+                    "email": "chua@uzyn.com",
+                    "homepage": "http://uzyn.com"
+                }
+            ],
+            "description": "Facebook strategy for Opauth",
+            "homepage": "http://opauth.org",
+            "keywords": [
+                "Authentication",
+                "facebook",
+                "auth"
+            ]
+        },
+        {
+            "name": "opauth/google",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/uzyn/opauth-google.git",
+                "reference": "0.2.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/uzyn/opauth-google/zipball/0.2.1",
+                "reference": "0.2.1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0",
+                "opauth/opauth": ">=0.2.0"
+            },
+            "time": "1347338104",
+            "type": "library",
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "": "."
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "U-Zyn Chua",
+                    "email": "chua@uzyn.com",
+                    "homepage": "http://uzyn.com"
+                }
+            ],
+            "description": "Google strategy for Opauth",
+            "homepage": "http://opauth.org",
+            "keywords": [
+                "Authentication",
+                "google",
+                "auth"
+            ]
+        },
+        {
+            "name": "opauth/opauth",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/uzyn/opauth.git",
+                "reference": "8b4f52b0278a64b8944024ea5b38d28b6ea20481"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/uzyn/opauth/zipball/8b4f52b0278a64b8944024ea5b38d28b6ea20481",
+                "reference": "8b4f52b0278a64b8944024ea5b38d28b6ea20481",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "suggest": {
+                "opauth/facebook": "Allows Facebook authentication",
+                "opauth/google": "Allows Google authentication",
+                "opauth/twitter": "Allows Twitter authentication"
+            },
+            "time": "1346262131",
+            "type": "library",
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "": "lib/Opauth/",
+                    "Opauth": "lib/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "U-Zyn Chua",
+                    "email": "chua@uzyn.com",
+                    "homepage": "http://uzyn.com"
+                }
+            ],
+            "description": "Multi-provider authentication framework for PHP",
+            "homepage": "http://opauth.org",
+            "keywords": [
+                "OpenId",
+                "Authentication",
+                "oauth",
+                "twitter",
+                "google",
+                "facebook",
+                "auth",
+                "omniauth"
+            ]
+        },
+        {
+            "name": "opauth/twitter",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/uzyn/opauth-twitter.git",
+                "reference": "14f19113057121df957e76b9f07ffa750f060263"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/uzyn/opauth-twitter/zipball/14f19113057121df957e76b9f07ffa750f060263",
+                "reference": "14f19113057121df957e76b9f07ffa750f060263",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0",
+                "opauth/opauth": ">=0.2.0"
+            },
+            "time": "1347373335",
+            "type": "library",
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "": "."
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "U-Zyn Chua",
+                    "email": "chua@uzyn.com",
+                    "homepage": "http://uzyn.com"
+                }
+            ],
+            "description": "Twitter strategy for Opauth",
+            "homepage": "http://opauth.org",
+            "keywords": [
+                "Authentication",
+                "twitter",
+                "auth"
+            ]
+        },
+        {
             "name": "pimple/pimple",
             "version": "dev-master",
             "source": {
@@ -340,12 +526,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/fabpot/Silex.git",
-                "reference": "97e418fcb0df2dd570732b208ce03e40e3dd2e0b"
+                "reference": "66204d6be73f472762632df5cc0a6853e730d77b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/fabpot/Silex/zipball/97e418fcb0df2dd570732b208ce03e40e3dd2e0b",
-                "reference": "97e418fcb0df2dd570732b208ce03e40e3dd2e0b",
+                "url": "https://github.com/fabpot/Silex/zipball/66204d6be73f472762632df5cc0a6853e730d77b",
+                "reference": "66204d6be73f472762632df5cc0a6853e730d77b",
                 "shasum": ""
             },
             "require": {
@@ -379,7 +565,7 @@
                 "symfony/css-selector": "2.1.*",
                 "symfony/dom-crawler": "2.1.*"
             },
-            "time": "1347738639",
+            "time": "1347972089",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -626,12 +812,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/HttpKernel",
-                "reference": "584499e64026f41c4be938ed35d8f0a9a9eebd38"
+                "reference": "52820d9f3b80e3b8d31aba53bb792ec25894e092"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/HttpKernel/zipball/584499e64026f41c4be938ed35d8f0a9a9eebd38",
-                "reference": "584499e64026f41c4be938ed35d8f0a9a9eebd38",
+                "url": "https://github.com/symfony/HttpKernel/zipball/52820d9f3b80e3b8d31aba53bb792ec25894e092",
+                "reference": "52820d9f3b80e3b8d31aba53bb792ec25894e092",
                 "shasum": ""
             },
             "require": {
@@ -657,7 +843,7 @@
                 "symfony/dependency-injection": "2.1.*",
                 "symfony/finder": "2.1.*"
             },
-            "time": "1347354770",
+            "time": "1347914517",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -743,12 +929,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/OptionsResolver",
-                "reference": "v2.1.0-RC2"
+                "reference": "v2.1.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/OptionsResolver/zipball/v2.1.0-RC2",
-                "reference": "v2.1.0-RC2",
+                "url": "https://github.com/symfony/OptionsResolver/zipball/v2.1.1",
+                "reference": "v2.1.1",
                 "shasum": ""
             },
             "require": {
@@ -973,12 +1159,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Validator",
-                "reference": "v2.1.1"
+                "reference": "5e06bbdcbbadfd946cb3a5f231c0c1bf40ff1b36"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/Validator/zipball/v2.1.1",
-                "reference": "v2.1.1",
+                "url": "https://github.com/symfony/Validator/zipball/5e06bbdcbbadfd946cb3a5f231c0c1bf40ff1b36",
+                "reference": "5e06bbdcbbadfd946cb3a5f231c0c1bf40ff1b36",
                 "shasum": ""
             },
             "require": {
@@ -994,7 +1180,7 @@
                 "symfony/http-foundation": "2.1.*",
                 "symfony/yaml": "2.1.*"
             },
-            "time": "1347274422",
+            "time": "1347903959",
             "type": "library",
             "extra": {
                 "branch-alias": {

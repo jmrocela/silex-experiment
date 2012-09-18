@@ -9,11 +9,11 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 class Session {
 
     /** @ODM\Id */
-    private $_id;
+    private $id;
 
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
 	/** @ODM\Field(type="string") */
@@ -56,16 +56,16 @@ class Session {
     }
 
     /** @ODM\Field(type="string") */
-    private $ip;
+    private $IP;
 
     public function setIP($val = null)
     {
-        $this->ip = ($val == null) ? time(): $val;
+        $this->IP = ($val == null) ? time(): $val;
     }
 
     public function getIP()
     {
-        return $this->ip;
+        return $this->IP;
     }
 
     /** @ODM\Field(type="string") */
