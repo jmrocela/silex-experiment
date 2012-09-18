@@ -46,9 +46,9 @@ class SessionHandler implements \SessionHandlerInterface {
     public function read($key) 
     {
         try {
-            $session = $this->db->createQueryBuilder('\Documents\Session')->field('sess_id')->equals($key)->getQuery()->getSingleResult();
-            if ($session = base64_decode($session)) {
-                return $session;
+            $data = $this->db->createQueryBuilder('\Documents\Session')->field('sess_id')->equals($key)->getQuery()->getSingleResult();
+            if ($data) {
+                return base64_decode($data->getSessData());
             }
 
             $this->create($key);
@@ -64,8 +64,10 @@ class SessionHandler implements \SessionHandlerInterface {
     {
         $session = new \Documents\Session();
         $session->setSessId($key);
-        $session->setSessData(base64_encode($data));
-        $session->setSessTime(time());
+        $session->setData(base64_encode($data));
+        $session->setTime(time());
+        $session->setIP($_SERVER['REMOTE_ADDR']);
+        $session->setUseragent($_SERVER['HTTP_USER_AGENT']);
 
         $this->db->persist($session);
         $this->db->flush();

@@ -9,11 +9,11 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 class Session {
 
     /** @ODM\Id */
-    private $id;
+    private $_id;
 
     public function getId()
     {
-        return $this->id;
+        return $this->_id;
     }
 
 	/** @ODM\Field(type="string") */
@@ -30,29 +30,55 @@ class Session {
     }
 
     /** @ODM\Field(type="string") */
-    private $sess_data;
+    private $data;
 
-    public function setSessData($val = null)
+    public function setData($val = null)
     {
-    	$this->sess_data = $val;
+    	$this->data = $val;
     }
 
-    public function getSessData()
+    public function getData()
     {
-    	return $this->sess_data;
+    	return $this->data;
     }
 
     /** @ODM\Field(type="string") */
-    private $sess_time;
+    private $time;
 
-    public function setSessTime($val = null)
+    public function setTime($val = null)
     {
-    	$this->sess_time = ($val == null) ? time(): $val;
+    	$this->time = ($val == null) ? time(): $val;
     }
 
-    public function getSessTime()
+    public function getTime()
     {
-    	return $this->sess_time;
+    	return $this->time;
+    }
+
+    /** @ODM\Field(type="string") */
+    private $ip;
+
+    public function setIP($val = null)
+    {
+        $this->ip = ($val == null) ? time(): $val;
+    }
+
+    public function getIP()
+    {
+        return $this->ip;
+    }
+
+    /** @ODM\Field(type="string") */
+    private $useragent;
+
+    public function setUseragent($val = null)
+    {
+        $this->useragent = ($val == null) ? time(): $val;
+    }
+
+    public function getUseragent()
+    {
+        return $this->useragent;
     }
 
 }
