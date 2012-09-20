@@ -75,8 +75,12 @@ foreach ($routes as $site => $handles) {
 				$request = $app->handle->before($request);
 
 				// get the request accept header
-				$app->handle->requestFormat = (isset($route['accept'])) ? $route['accept']: $request->headers->get('Accept');
-				$app->handle->locale = (isset($route['locale'])) ? $route['locale']: null;
+				$app['request_format'] = $app->share(function() use ($route, $request) {
+					return (isset($route['accept'])) ? $route['accept']: $request->headers->get('Accept');
+				});
+				$app['locale'] = $app->share(function() use ($route) {
+					return (isset($route['locale'])) ? $route['locale']: null;
+				});
 				
 				// attach some traits
 				$app->handle->request = $request;
@@ -84,7 +88,7 @@ foreach ($routes as $site => $handles) {
 		    })
 		    ->after(function(Request $request, Response $response) use ($app, $route) {	
 		    	// get the accepted content type
-				$content_type = ($app->handle->requestFormat) ? $app->handle->requestFormat: DEFAULT_CONTENT_TYPE;
+				$content_type = ($app['request_format']) ? $app['request_format']: DEFAULT_CONTENT_TYPE;
 
 				// execute the after handler if there is
 				$response = $app->handle->after($request, $response);

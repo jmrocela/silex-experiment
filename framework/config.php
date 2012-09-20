@@ -28,4 +28,8 @@ define('DB_NAME', 'sprintport');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
 
+// Facebook
+define('FACEBOOK_API_ID', '366789346734959');
+define('FACEBOOK_API_SECRET', 'eab4657a95869e810d0710ea486dedfb');
+
 // --- EOF

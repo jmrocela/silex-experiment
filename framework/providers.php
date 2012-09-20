@@ -3,7 +3,9 @@
  * (c) 2012 Springload. All rights reserved.
  */
 
-// register our simple mongodb handler
+/**
+ * register our simple mongodb handler
+ */
 require_once FRAMEWORK_DIR . 'providers' . DS . 'MongoDBServiceProvider.php';
 $app->register(new DRodin\Extension\MongoDBServiceProvider(), array(
         'mongo.options' => array(
@@ -20,7 +22,9 @@ $app->register(new DRodin\Extension\MongoDBServiceProvider(), array(
         'mongo.common.documents_dir' => FRAMEWORK_DIR . 'core'
     ));
 
-// register our session handler
+/**
+ * register our session handler
+ */
 require_once FRAMEWORK_DIR . 'core' . DS . 'SessionHandler.php';
 $app->register(new Silex\Provider\SessionServiceProvider());
 $app['session.storage.handler'] = $app->share(function () use ($app) {
@@ -30,19 +34,33 @@ $app['session.storage.handler'] = $app->share(function () use ($app) {
     });
 $app['session']->start();
 
-// register our logging service
+/**
+ * register our logging service
+ */
+// 
 $app->register(new Silex\Provider\MonologServiceProvider(), array(
         'monolog.name' => 'SPRINTPORT',
     	'monolog.logfile' => TEMP_DIR . 'logs' . DS . API_ENV_LEVEL . '.log'
     ));
 
-// register our mustache provider
+/**
+ * register our mustache provider
+ */
 require_once FRAMEWORK_DIR . 'providers' . DS . 'MustacheServiceProvider.php';
 $app->register(new MustacheServiceProvider(), array(
         'mustache.path' => TEMPLATE_DIR
     ));
 
-// register our security @todo
-/*$app->register(new Silex\Provider\SecurityServiceProvider(), array(
-    'security.firewalls' => array()
+/**
+ * register our security 
+ *
+ * @todo
+ */
+/*require_once FRAMEWORK_DIR . 'providers' . DS . 'OPAuthServiceProvider.php';
+$app->register(new Silex\Provider\SecurityServiceProvider(), array(
+    'security.firewalls' => array(
+        'default' => array(
+            'opauth' => true
+        )
+    )
 ));*/

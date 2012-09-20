@@ -8,6 +8,18 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class Controller {
+	
+	private $requestFormat = 'application/json';
+	
+	private $locale = 'en-US';
+	
+	private $session = null;
+	
+	private $log = null;
+	
+	private $mongo = null;
+	
+	private $mustache = null;
 
 	public function __construct() {}
 
@@ -25,6 +37,8 @@ class Controller {
 
 	public function apply(Application $app)
 	{
+        $this->requestFormat = $app['request_format'];
+        $this->locale = $app['locale'];
 		$this->session = $app['session'];
 		$this->log = $app['monolog'];
 		$this->mongo = $app['mongo'];

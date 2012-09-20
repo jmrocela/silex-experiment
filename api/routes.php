@@ -10,7 +10,8 @@ return array(
 	WWW_HOST => array(
 		'prefix' => WWW_HOST_PATH,
 		'routes' => array(
-				array('pattern' => '/', 'path' => 'Frontend/Index')
+				array('pattern' => '/', 'path' => 'Frontend/Index'),
+				array('pattern' => '/auth', 'path' => 'User/auth')
 			)
 	),
 

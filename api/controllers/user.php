@@ -1,3 +1,16 @@
+<?php
+
+class UserController extends Solar\Controller {
+
+	public function auth()
+	{
+		
+	}
+
+}
+
+/*
+
 namespace 
 
 /user
@@ -54,3 +67,5 @@ SEARCH
 PROFILE
 
 CRUD
+
+*/
