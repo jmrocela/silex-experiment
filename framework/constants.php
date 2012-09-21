@@ -11,9 +11,10 @@ define('PUT', 'PUT');
 define('DELETE', 'DELETE');
 define('PATCH', 'PATCH');
 
-// Content Type
 define('DEFAULT_CONTENT_TYPE', 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8');
 define('DEFAULT_LOCALE', 'en-US');
+
+define('SECURITY_SALT', 'mlkLASUHLPO309NSMDLkj78XNeikjr300');
 
 // Roles
 define('ROLE_USER', 'USER');

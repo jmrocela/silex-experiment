@@ -1,5 +1,7 @@
 <?php
 
+namespace Solar;
+
 use Silex\ServiceProviderInterface;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
@@ -10,7 +12,7 @@ class MustacheServiceProvider implements ServiceProviderInterface {
     public function register(Application $app)
     {
         $app['mustache'] = $app->share(function ($app) {
-            return new Mustache_Engine();
+            return new \Mustache_Engine();
         });
     }
 

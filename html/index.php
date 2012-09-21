@@ -15,6 +15,7 @@ define('TEMPLATE_DIR', API_DIR . 'templates' . DS);
 // Require the Confiugration and Constants
 require_once FRAMEWORK_DIR . 'config.php';
 require_once FRAMEWORK_DIR . 'constants.php';
+$app['debug'] = API_DEBUG;
 
 // Require the Silex Library
 require_once FRAMEWORK_DIR . DS . 'vendor' . DS . 'autoload.php';

@@ -9,7 +9,7 @@
 define('API_VERSION', '1.0');
 define('API_LAMENAME', 'apricot');
 define('API_LANG', 'en-us');
-define('API_ENV_LEVEL', 'dev');
+define('API_ENV_LEVEL', 'DEV');
 define('API_DEBUG', true);
 
 // Domains
@@ -29,7 +29,7 @@ define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
 
 // Facebook
-define('FACEBOOK_API_ID', '366789346734959');
-define('FACEBOOK_API_SECRET', 'eab4657a95869e810d0710ea486dedfb');
+define('FACEBOOK_APP_ID', '366789346734959');
+define('FACEBOOK_APP_SECRET', 'eab4657a95869e810d0710ea486dedfb');
 
 // --- EOF

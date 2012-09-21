@@ -7,7 +7,7 @@
  * register our simple mongodb handler
  */
 require_once FRAMEWORK_DIR . 'providers' . DS . 'MongoDBServiceProvider.php';
-$app->register(new DRodin\Extension\MongoDBServiceProvider(), array(
+$app->register(new Solar\MongoDBServiceProvider(), array(
         'mongo.options' => array(
             'server' => DB_HOST,
             'dbname' => DB_NAME
@@ -47,7 +47,7 @@ $app->register(new Silex\Provider\MonologServiceProvider(), array(
  * register our mustache provider
  */
 require_once FRAMEWORK_DIR . 'providers' . DS . 'MustacheServiceProvider.php';
-$app->register(new MustacheServiceProvider(), array(
+$app->register(new Solar\MustacheServiceProvider(), array(
         'mustache.path' => TEMPLATE_DIR
     ));
 
@@ -56,11 +56,55 @@ $app->register(new MustacheServiceProvider(), array(
  *
  * @todo
  */
-/*require_once FRAMEWORK_DIR . 'providers' . DS . 'OPAuthServiceProvider.php';
-$app->register(new Silex\Provider\SecurityServiceProvider(), array(
-    'security.firewalls' => array(
-        'default' => array(
-            'opauth' => true
+// Register the OpenAuth service provider.
+require_once FRAMEWORK_DIR . 'providers' . DS . 'OPAuthServiceProvider.php';
+require_once FRAMEWORK_DIR . 'providers' . DS . 'UserProvider.php';
+require_once FRAMEWORK_DIR . 'providers' . DS . 'OPAuth' . DS . 'OPAuthAuthenticationProvider.php';
+require_once FRAMEWORK_DIR . 'providers' . DS . 'OPAuth' . DS . 'OPAuthAuthenticationListener.php';
+$app->register(new Solar\OPAuthServiceProvider(), array(
+    'opauth.path' => '/auth',
+    'opauth.config' => array(
+        'callback_url' => '/auth/callback',
+        'callback_transport' => 'session',
+        'security_salt' => SECURITY_SALT,
+        'Strategy' => array(
+            'Facebook' => array(
+                'app_id' => FACEBOOK_APP_ID,
+                'app_secret' => FACEBOOK_APP_SECRET,
+                'redirect_uri' => 'http://' . WWW_HOST . '/auth/facebook/int_callback'
+            )
         )
     )
-));*/
+));
+
+$app->register(new Silex\Provider\SecurityServiceProvider(), array(
+    'security.firewalls' => array(
+        'secure' => array(
+            'pattern' => '^/',
+            'anonymous' => true,
+            'form' => array(
+                'login_path' => '/login',
+                'check_path' => '/auth/check'
+            ),
+            'opauth.facebook' => array(
+                'oauth_provider' => 'facebook',
+                'login_path' => '/auth/facebook',
+                'check_path' => '/auth/callback',
+                'failure_path' => '/login?try_again'
+            ),
+            'logout' => array(
+                'logout_path' => '/logout'
+            ),
+            'users' => $app->share(function () use ($app) {
+                    return new Solar\UserProvider();
+                })
+        )
+    ),
+    'security.access_rules' => array(
+        array('^/admin', 'ROLE_ADMIN', 'https'),
+        array('^/albums', 'ROLE_USER')
+    ),
+    'security.role_hierarchy' => array(
+        'ROLE_ADMIN' => array('ROLE_USER', 'ROLE_ALLOWED_TO_SWITCH'),
+    )
+));

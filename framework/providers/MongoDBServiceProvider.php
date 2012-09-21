@@ -2,7 +2,7 @@
 /**
  * @https://github.com/madiedinro/MongoExtension
  */
-namespace DRodin\Extension;
+namespace Solar;
 
 
 use Silex\Application;
