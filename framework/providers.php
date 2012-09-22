@@ -4,9 +4,14 @@
  */
 
 /**
+ * Register custom providers
+ */
+$loader = \ComposerAutoloaderInit::getLoader();
+$loader->add('Solar', FRAMEWORK_DIR . 'providers');
+
+/**
  * register our simple mongodb handler
  */
-require_once FRAMEWORK_DIR . 'providers' . DS . 'MongoDBServiceProvider.php';
 $app->register(new Solar\MongoDBServiceProvider(), array(
         'mongo.options' => array(
             'server' => DB_HOST,
@@ -46,7 +51,6 @@ $app->register(new Silex\Provider\MonologServiceProvider(), array(
 /**
  * register our mustache provider
  */
-require_once FRAMEWORK_DIR . 'providers' . DS . 'MustacheServiceProvider.php';
 $app->register(new Solar\MustacheServiceProvider(), array(
         'mustache.path' => TEMPLATE_DIR
     ));
@@ -57,10 +61,6 @@ $app->register(new Solar\MustacheServiceProvider(), array(
  * @todo
  */
 // Register the OpenAuth service provider.
-require_once FRAMEWORK_DIR . 'providers' . DS . 'OPAuthServiceProvider.php';
-require_once FRAMEWORK_DIR . 'providers' . DS . 'UserProvider.php';
-require_once FRAMEWORK_DIR . 'providers' . DS . 'OPAuth' . DS . 'OPAuthAuthenticationProvider.php';
-require_once FRAMEWORK_DIR . 'providers' . DS . 'OPAuth' . DS . 'OPAuthAuthenticationListener.php';
 $app->register(new Solar\OPAuthServiceProvider(), array(
     'opauth.path' => '/auth',
     'opauth.config' => array(
