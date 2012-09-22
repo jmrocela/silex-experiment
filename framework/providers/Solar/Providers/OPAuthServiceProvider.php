@@ -1,13 +1,13 @@
 <?php
 
-namespace Solar;
+namespace Solar\Providers;
 
 use Silex\Application;
 use Silex\ServiceProviderInterface;
 use Symfony\Component\HttpFoundation\RequestMatcher;
 use Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint;
-use Solar\OPAuth\OPAuthAuthenticationListener;
-use Solar\OPAuth\OPAuthAuthenticationProvider;
+use Solar\Providers\OPAuth\OPAuthAuthenticationListener;
+use Solar\Providers\OPAuth\OPAuthAuthenticationProvider;
 
 /**
  * @brief       Opauth authentication library integration.

@@ -6,9 +6,6 @@
 // use some symfony stuff
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
- 
-// require some of our files
-require_once FRAMEWORK_DIR . 'core' . DS . 'Controller.php';
 
 // register silex modules
 require_once FRAMEWORK_DIR . 'providers.php';
@@ -18,6 +15,12 @@ $routes = require_once API_DIR . 'routes.php';
 
 // get factory for v1 of the api
 $context = $app['controllers_factory'];
+
+// get the request accept header
+$app['request_format'] = $app->share(function() {
+	$request = Request::createFromGlobals();
+	return $request->headers->get('Accept');
+});
 
 // apply our routes
 foreach ($routes as $site => $handles) {
@@ -78,6 +81,8 @@ foreach ($routes as $site => $handles) {
 				$app['request_format'] = $app->share(function() use ($route, $request) {
 					return (isset($route['accept'])) ? $route['accept']: $request->headers->get('Accept');
 				});
+
+				// set locale
 				$app['locale'] = $app->share(function() use ($route) {
 					return (isset($route['locale'])) ? $route['locale']: null;
 				});
@@ -97,7 +102,7 @@ foreach ($routes as $site => $handles) {
 		    	if ($content_type == DEFAULT_CONTENT_TYPE) {
 			    	$template = (!empty($route['template'])) ? $route['template']: str_replace('controller', '', strtolower(get_class($app->handle))) . DS . strtolower($app->method) . '.ms';
 					if (file_exists(TEMPLATE_DIR . $template)) {
-						$template = require_once TEMPLATE_DIR . $template;
+						$template = file_get_contents(TEMPLATE_DIR . $template);
 					} else {
 						throw new \Exception('Template "' . $template . '" could not be found. Make sure the template exists under ' . TEMPLATE_DIR);
 					}
@@ -133,7 +138,7 @@ foreach ($routes as $site => $handles) {
 
 // error handler
 $app->error(function (\Exception $e, $code) use($app) {
-
+echo $e;
 	if (API_DEBUG) {
 		$app['monolog']->addDebug($e);
 	}
@@ -174,7 +179,7 @@ $app->error(function (\Exception $e, $code) use($app) {
 		$response = $controller->after($request, $response);
 
 		// load our 404 template. we don't need anything else actually
-		$template = require_once TEMPLATE_DIR . '404.ms';
+		$template = file_get_contents(TEMPLATE_DIR . '404.ms');
 		$rendered = $controller->render($template, $response);
 		return new Response($rendered, $code);
 

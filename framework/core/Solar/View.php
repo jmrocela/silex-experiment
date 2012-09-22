@@ -1,6 +1,8 @@
 <?php
 
-namespace VGMdb;
+namespace Solar;
+
+use \Solar\ViewInterface;
 
 /**
  * @brief       Nestable view container with rendering callback.

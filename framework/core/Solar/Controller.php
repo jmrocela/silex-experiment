@@ -20,6 +20,8 @@ class Controller {
 	private $mongo = null;
 	
 	private $mustache = null;
+	
+	private $view = null;
 
 	public function __construct() {}
 
@@ -42,7 +44,12 @@ class Controller {
 		$this->session = $app['session'];
 		$this->log = $app['monolog'];
 		$this->mongo = $app['mongo'];
-		$this->mustache = $app['mustache'];
+		$this->view = $app['view'];
+
+		/**
+		 * @set template data
+		 */
+		$this->globals = array();
 	}
 
 	public function render($template, Response $response)
@@ -58,7 +65,9 @@ class Controller {
 		 * else, we do nothing and render the whole page as html.
 		 */
 		if ($this->requestFormat == DEFAULT_CONTENT_TYPE) {
-			return $this->mustache->render($template, json_decode($response));
+			$response = array_merge((array) json_decode($response), $this->globals);
+			$control = $this->view;
+			return $control($template, $response);
 		} else {
 			return $response;
 		}

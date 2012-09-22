@@ -1,6 +1,6 @@
 <?php
 
-namespace Solar;
+namespace Solar\Providers;
 
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Solar\OPAuth;
+namespace Solar\Providers\OPAuth;
 
 use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Solar\OPAuth;
+namespace Solar\Providers\OPAuth;
 
 use Symfony\Component\Security\Http\Firewall\AbstractAuthenticationListener;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
@@ -14,8 +14,8 @@ use Symfony\Component\HttpKernel\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Solar\OPAuth\OPAuthAuthenticationProvider;
-use Solar\OPAuth\OPAuthToken;
+use Solar\Providers\OPAuth\OPAuthAuthenticationProvider;
+use Solar\Providers\OPAuth\OPAuthToken;
 
 /**
  * @brief       Authentication listener handling OAuth Authentication requests.

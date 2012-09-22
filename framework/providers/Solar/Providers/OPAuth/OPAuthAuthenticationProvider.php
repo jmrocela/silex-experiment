@@ -1,6 +1,6 @@
 <?php
 
-namespace Solar\OPAuth;
+namespace Solar\Providers\OPAuth;
 
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
@@ -8,7 +8,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Security\Core\Authentication\Provider\AuthenticationProviderInterface;
-use Solar\OPAuth\OpauthToken;
+use Solar\Providers\OPAuth\OpauthToken;
 
 /**
  * @brief       Authentication provider handling OAuth Authentication requests.

@@ -1,6 +1,6 @@
 <?php
 
-namespace VGMdb;
+namespace Solar;
 
 /**
  * @brief       ViewInterface objects must implement render(), nest() and __toString().

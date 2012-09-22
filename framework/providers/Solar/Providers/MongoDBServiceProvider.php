@@ -2,7 +2,7 @@
 /**
  * @https://github.com/madiedinro/MongoExtension
  */
-namespace Solar;
+namespace Solar\Providers;
 
 
 use Silex\Application;
