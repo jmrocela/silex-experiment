@@ -20,8 +20,6 @@ class Controller {
 	private $mongo = null;
 	
 	private $mustache = null;
-	
-	private $view = null;
 
 	public function __construct() {}
 
@@ -45,11 +43,6 @@ class Controller {
 		$this->log = $app['monolog'];
 		$this->mongo = $app['mongo'];
 		$this->view = $app['view'];
-
-		/**
-		 * @set template data
-		 */
-		$this->globals = array();
 	}
 
 	public function render($template, Response $response)
@@ -64,13 +57,8 @@ class Controller {
 		 * if lazy is on, just return the response as json or
 		 * else, we do nothing and render the whole page as html.
 		 */
-		if ($this->requestFormat == DEFAULT_CONTENT_TYPE) {
-			$response = array_merge((array) json_decode($response), $this->globals);
-			$control = $this->view;
-			return $control($template, $response);
-		} else {
-			return $response;
-		}
+		$view = $this->view;
+		return $view($template, (array) json_decode($response));
 	}
 
 }

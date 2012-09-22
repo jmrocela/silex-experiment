@@ -92,7 +92,7 @@ class View extends \ArrayObject implements ViewInterface
     public function render($data = array())
     {
         $render = $this->with($data)->render_callback;
-
+        
         return $render($this);
     }
 

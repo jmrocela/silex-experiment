@@ -14,7 +14,11 @@ class MustacheServiceProvider implements ServiceProviderInterface {
     {
         $app['mustache'] = $app->share(function () use ($app) {
             $mustache = new \Mustache_Engine(array(
-                'cache' => $app['mustache.cache_dir']
+                'cache' => $app['mustache.cache_dir'],
+                'loader' => new \Mustache_Loader_FilesystemLoader(
+                    $app['mustache.template_dir'],
+                    array('extension' => $app['mustache.extension'])
+                )
             ));
             return $mustache;
         });
@@ -22,10 +26,11 @@ class MustacheServiceProvider implements ServiceProviderInterface {
         // View factory service
         $app['view'] = $app->protect(function ($template, array $data = array()) use ($app) {
             $view = new View($template, array(), function ($view) use ($app) {
-                if ($app['request_format'] == DEFAULT_CONTENT_TYPE) {
-                    return $app['mustache']->loadTemplate($view->template)->render($view);
+                if ($app['request_format'] == DEFAULT_CONTENT_TYPE) {   
+                    return $app['mustache']->loadTemplate($view->template)->render((array) $view);
+                } else {
+                    return $response;
                 }
-                return json_encode($view->getArrayCopy());
             });
             // TODO: check if this pollutes the view container!
             return $view->with($data);

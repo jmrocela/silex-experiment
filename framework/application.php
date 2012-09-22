@@ -100,12 +100,7 @@ foreach ($routes as $site => $handles) {
 
 		    	// where are our templates located?
 		    	if ($content_type == DEFAULT_CONTENT_TYPE) {
-			    	$template = (!empty($route['template'])) ? $route['template']: str_replace('controller', '', strtolower(get_class($app->handle))) . DS . strtolower($app->method) . '.ms';
-					if (file_exists(TEMPLATE_DIR . $template)) {
-						$template = file_get_contents(TEMPLATE_DIR . $template);
-					} else {
-						throw new \Exception('Template "' . $template . '" could not be found. Make sure the template exists under ' . TEMPLATE_DIR);
-					}
+			    	$template = (!empty($route['template'])) ? $route['template']: str_replace('controller', '', strtolower(get_class($app->handle))) . DS . strtolower($app->method);
 			    	// generate the rendered template
 					$rendered = $app->handle->render($template, $response);
 
@@ -138,7 +133,7 @@ foreach ($routes as $site => $handles) {
 
 // error handler
 $app->error(function (\Exception $e, $code) use($app) {
-echo $e;
+
 	if (API_DEBUG) {
 		$app['monolog']->addDebug($e);
 	}
@@ -179,8 +174,7 @@ echo $e;
 		$response = $controller->after($request, $response);
 
 		// load our 404 template. we don't need anything else actually
-		$template = file_get_contents(TEMPLATE_DIR . '404.ms');
-		$rendered = $controller->render($template, $response);
+		$rendered = $controller->render('404', $response);
 		return new Response($rendered, $code);
 
 	}

@@ -4,7 +4,9 @@ class UserController extends Solar\Controller {
 
 	public function auth()
 	{
-		
+		return array(
+				'login_facebook' => '/login/facebook'
+			);
 	}
 
 }

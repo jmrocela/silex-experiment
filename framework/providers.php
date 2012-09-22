@@ -52,7 +52,9 @@ $app->register(new Silex\Provider\MonologServiceProvider(), array(
  * register our mustache provider
  */
 $app->register(new Solar\Providers\MustacheServiceProvider(), array(
-        'mustache.cache_dir' => TEMP_DIR . 'cache'
+        'mustache.template_dir' => TEMPLATE_DIR,
+        'mustache.cache_dir' => TEMP_DIR . 'cache',
+        'mustache.extension' => '.ms'
     ));
 
 /**
