@@ -80,10 +80,10 @@ class OPAuthServiceProvider implements ServiceProviderInterface
     public function boot(Application $app)
     {
         // fake route which will be handled by auth listener
-        $app->match('/auth/{strategy}', function() {});
+        $app->match('/secure/auth/{strategy}', function() {});
 
         // this route must be unsecured
-        $app->match('/login/{strategy}/{callback}', function ($strategy, $callback) use ($app) {
+        $app->match('/secure/login/{strategy}/{callback}', function ($strategy, $callback) use ($app) {
             $app['opauth']->run();
         });
     }

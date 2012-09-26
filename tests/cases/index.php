@@ -3,7 +3,7 @@
 // Set these to what you require
 
 // Path to PHPUnit_Html or null if include path 
-$config['phpunit_html'] = null;
+$config['phpunit_html'] = '../lib/';
 
 // Path to PHPUnit or null if include path (ie. /usr/local/php/PEAR/PHPUnit/)
 $config['phpunit'] = null;

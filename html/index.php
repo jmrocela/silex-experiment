@@ -1,6 +1,10 @@
 <?php
 /**
- * (c) 2012 Springload. All rights reserved.
+ * Index
+ *
+ * responsible for loading everything and running the app.
+ *
+ * (c) 2012 Wanderlust. All rights reserved.
  */
  
 // Do some path definitions

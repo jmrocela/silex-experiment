@@ -11,7 +11,8 @@ return array(
 		'prefix' => WWW_HOST_PATH,
 		'routes' => array(
 				array('pattern' => '/', 'path' => 'Frontend/index'),
-				array('pattern' => '/auth', 'path' => 'User/auth'),
+				array('pattern' => '/secure/login', 'path' => 'User/login'),
+				array('pattern' => '/secure/logout', 'path' => 'User/logout')
 			)
 	),
 

@@ -1,3 +1,25 @@
+<?php
+
+namespace Solar\Controllers;
+
+class UserController extends Solar\Controller {
+
+	public function auth()
+	{
+		return $_GET;
+	}
+
+	public function login()
+	{
+		return array(
+				'login_facebook' => '/secure/auth/facebook'
+			);
+	}
+
+}
+
+/*
+
 namespace 
 
 /user
@@ -54,3 +76,5 @@ SEARCH
 PROFILE
 
 CRUD
+
+*/

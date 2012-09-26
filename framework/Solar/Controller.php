@@ -39,10 +39,12 @@ class Controller {
 	{
         $this->requestFormat = $app['request_format'];
         $this->locale = $app['locale'];
-		$this->session = $app['session'];
+		//$this->session = $app['session'];
+		$this->security = $app['security'];
 		$this->log = $app['monolog'];
-		$this->mongo = $app['mongo'];
+		//$this->mongo = $app['mongo'];
 		$this->view = $app['view'];
+		$this->firewalls = $app['security.firewalls'];
 	}
 
 	public function render($template, Response $response)

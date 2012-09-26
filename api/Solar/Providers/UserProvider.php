@@ -7,44 +7,30 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\User;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 
-/**
- * @brief       User entity provider.
- * @author      Gigablah <gigablah@vgmdb.net>
- */
 class UserProvider implements UserProviderInterface
 {
     public function loadUserByUsername($username)
     {
-        if ($username !== 'gigablah') {
+
+        $user = $this->db->createQueryBuilder('\Documents\User')->field('username')->equals($username)->getQuery()->getSingleResult();
+
+        if ($user) {
             throw new UsernameNotFoundException(sprintf('Username "%s" does not exist.', $username));
         }
 
-        return new User(
-            'gigablah',
-            '5FZ2Z8QIkA7UTZ4BYkoC+GsReLf569mSKDsfods6LYQ8t+a8EW9oaircfMpmaLbPBh4FOBiiFyLfuZmTSUwzZg==',
-            array('ROLE_ADMIN', 'ROLE_USER'),
-            true,
-            true,
-            true,
-            true
-        );
+        return new User($user->getUsername(), $user->getPassword(), array('ROLE_USER'), true, true, true, true);
     }
 
     public function loadUserByUserId($uid)
     {
-        if ($uid !== '1110663126') {
+        
+        $user = $this->db->createQueryBuilder('\Documents\User')->field('user_id')->equals($uid)->getQuery()->getSingleResult();
+
+        if ($user) {
             throw new UsernameNotFoundException(sprintf('User ID "%s" does not exist.', $uid));
         }
 
-        return new User(
-            'gigablah',
-            '5FZ2Z8QIkA7UTZ4BYkoC+GsReLf569mSKDsfods6LYQ8t+a8EW9oaircfMpmaLbPBh4FOBiiFyLfuZmTSUwzZg==',
-            array('ROLE_ADMIN', 'ROLE_USER'),
-            true,
-            true,
-            true,
-            true
-        );
+        return new User($user->getUsername(), $user->getPassword(), array('ROLE_USER'), true, true, true, true);
     }
 
     public function refreshUser(UserInterface $user)

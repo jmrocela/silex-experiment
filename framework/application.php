@@ -1,6 +1,10 @@
 <?php
 /**
- * (c) 2012 Springload. All rights reserved.
+ * Application
+ * 
+ * responsible for dispatching routes and catching errors.
+ * 
+ * (c) 2012 Wanderlust. All rights reserved.
  */
  
 // use some symfony stuff
@@ -62,7 +66,7 @@ foreach ($routes as $site => $handles) {
 					return new Response($response);
 				} else {
 					// method doesn't exist
-					return Error::response('Developer Notice: Controller method "' . $app->method . '" does not exist.', 500);
+					return new Response('Developer Notice: Controller method "' . $app->method . '" does not exist.', 500,  array('content-type' => 'application/json'));
 				}
 		    })
 		    ->before(function(Request $request) use ($app, $route) {
@@ -70,7 +74,7 @@ foreach ($routes as $site => $handles) {
 				$controller = explode('/', $route['path']);
 				$route_handle = $controller[0] . 'Controller';
 				$app->method = $controller[1];
-				
+
 				// I have the power!
 				$app->handle = new $route_handle();
 				
@@ -91,7 +95,10 @@ foreach ($routes as $site => $handles) {
 				$app->handle->request = $request;
 				$app->handle->apply($app);
 		    })
-		    ->after(function(Request $request, Response $response) use ($app, $route) {	
+		    ->after(function(Request $request, Response $response) use ($app, $route) {
+		    	// catch errors
+		    	if ($response->getStatusCode() == 500) return $response;
+
 		    	// get the accepted content type
 				$content_type = ($app['request_format']) ? $app['request_format']: DEFAULT_CONTENT_TYPE;
 
@@ -178,15 +185,6 @@ $app->error(function (\Exception $e, $code) use($app) {
 		return new Response($rendered, $code);
 
 	}
-});
-
-// register our autoloader
-spl_autoload_register(function($class_name) {
-
-	if (strpos($class_name, 'Controller')) {
-		require_once API_DIR . 'controllers' . DS . strtolower(str_replace('Controller', '', $class_name)) . '.php';
-	}
-	
 });
 
 // --- EOF

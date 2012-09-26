@@ -2,7 +2,9 @@
 /**
  * Configuration
  *
- * (c) 2012 Springload. All rights reserved.
+ * system wide configurations
+ *
+ * (c) 2012 Wanderlust. All rights reserved.
  */
 
 // Global
@@ -13,18 +15,18 @@ define('API_ENV_LEVEL', 'DEV');
 define('API_DEBUG', true);
 
 // Domains
-define('API_HOST', 'api.sprintport.local');
+define('API_HOST', 'api.wanderlust.local');
 define('API_HOST_PATH', '/v1');
-define('WWW_HOST', 'sprintport.local');
+define('WWW_HOST', 'wanderlust.local');
 define('WWW_HOST_PATH', '/');
-define('CDN_HOST', 'a1.cdn-sprintport.local');
+define('CDN_HOST', 'a1.cdn-wanderlust.local');
 
 // Session
 define('SESSION_NAME', 'SPRPORT');
 
 // Database
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'sprintport');
+define('DB_NAME', 'wanderlust');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
 

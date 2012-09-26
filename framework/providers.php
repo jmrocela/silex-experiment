@@ -1,14 +1,20 @@
 <?php
 /**
- * (c) 2012 Springload. All rights reserved.
+ * Providers
+ *
+ * this file is responsible with registering classes to the system. this also
+ * supports autoloading that complies to PSR-0
+ *
+ * (c) 2012 Wanderlust. All rights reserved.
  */
 
 /**
  * Register custom providers and classes
  */
 $loader = \ComposerAutoloaderInit::getLoader();
-$loader->add('Solar', FRAMEWORK_DIR . 'core');
-$loader->add('Solar\\Providers', FRAMEWORK_DIR . 'providers');
+$loader->add('Solar', FRAMEWORK_DIR . 'Solar');
+$loader->add('Solar\\Providers', API_DIR . 'Solar' . DS . 'Providers');
+$loader->add('Solar\\Controllers', API_DIR . 'Solar' . DS . 'Controllers');
 
 /**
  * register our simple mongodb handler
@@ -23,9 +29,9 @@ $app->register(new Solar\Providers\MongoDBServiceProvider(), array(
         'mongo.mongodb.class_path'  => FRAMEWORK_DIR . 'vendor' . DS . 'doctrine' . DS . 'mongodb' . DS . 'lib',
         'mongo.mongodbodm.class_path'  => FRAMEWORK_DIR . 'vendor' . DS . 'doctrine' . DS . 'mongodb-odm' . DS . 'lib',
 
-        'mongo.common.proxy_dir' => FRAMEWORK_DIR . 'core' . DS . 'Documents' . DS . 'proxy',
-        'mongo.common.hydrator_dir' => FRAMEWORK_DIR . 'core' . DS . 'Documents' . DS . 'hydrator',
-        'mongo.common.documents_dir' => FRAMEWORK_DIR . 'core'
+        'mongo.common.proxy_dir' => API_DIR . 'Solar' . DS . 'Documents' . DS . 'Proxy',
+        'mongo.common.hydrator_dir' => API_DIR . 'Solar' . DS . 'Documents' . DS . 'Hydrator',
+        'mongo.common.documents_dir' => API_DIR . 'Solar'
     ));
 
 /**
@@ -45,7 +51,7 @@ $app['session']->start();
 // 
 $app->register(new Silex\Provider\MonologServiceProvider(), array(
         'monolog.name' => 'SPRINTPORT',
-    	'monolog.logfile' => TEMP_DIR . 'logs' . DS . API_ENV_LEVEL . '.log'
+        'monolog.logfile' => TEMP_DIR . 'logs' . DS . API_ENV_LEVEL . '.log'
     ));
 
 /**
@@ -58,55 +64,39 @@ $app->register(new Solar\Providers\MustacheServiceProvider(), array(
     ));
 
 /**
- * register our security 
- *
- * @todo
+ * register the OpenAuth service provider.
  */
-// Register the OpenAuth service provider.
 $app->register(new Solar\Providers\OPAuthServiceProvider(), array(
-    'opauth.path' => '/auth',
-    'opauth.config' => array(
-        'callback_url' => '/auth/callback',
-        'callback_transport' => 'session',
-        'security_salt' => SECURITY_SALT,
-        'Strategy' => array(
-            'Facebook' => array(
-                'app_id' => FACEBOOK_APP_ID,
-                'app_secret' => FACEBOOK_APP_SECRET,
-                'redirect_uri' => 'http://' . WWW_HOST . '/auth/facebook/int_callback'
+        'opauth.path' => '/secure/auth',
+        'opauth.config' => array(
+            'callback_url' => '/secure/auth/callback',
+            'callback_transport' => 'session',
+            'security_salt' => SECURITY_SALT,
+            'Strategy' => array(
+                'Facebook' => array(
+                        'app_id' => FACEBOOK_APP_ID,
+                        'app_secret' => FACEBOOK_APP_SECRET,
+                        'redirect_uri' => 'http://' . WWW_HOST . '/secure/facebook/login',
+                        'scope' => 'user_about_me, user_checkins, user_hometown, user_interests, user_likes, user_location, friends_about_me, friends_checkins, friends_hometown, friends_interests, friends_likes, friends_location'
+                )
             )
         )
-    )
-));
+    ));
 
+/**
+ * register the Security service provider.
+ */
 $app->register(new Silex\Provider\SecurityServiceProvider(), array(
-    'security.firewalls' => array(
-        'secure' => array(
-            'pattern' => '^/',
-            'anonymous' => true,
-            'form' => array(
-                'login_path' => '/login',
-                'check_path' => '/auth/check'
-            ),
-            'opauth.facebook' => array(
-                'oauth_provider' => 'facebook',
-                'login_path' => '/auth/facebook',
-                'check_path' => '/auth/callback',
-                'failure_path' => '/login?try_again'
-            ),
-            'logout' => array(
-                'logout_path' => '/logout'
-            ),
-            'users' => $app->share(function () use ($app) {
-                    return new Solar\Providers\UserProvider();
-                })
+        'security.firewalls' => array(
+            'secure' => array(
+                'pattern' => '^/',
+                'anonymous' => true
+            )
+        ),
+        'security.access_rules' => array(
+            array('^/', 'ROLE_USER')
+        ),
+        'security.role_hierarchy' => array(
+            'ROLE_ADMIN' => array('ROLE_USER', 'ROLE_ALLOWED_TO_SWITCH'),
         )
-    ),
-    'security.access_rules' => array(
-        array('^/admin', 'ROLE_ADMIN', 'https'),
-        array('^/albums', 'ROLE_USER')
-    ),
-    'security.role_hierarchy' => array(
-        'ROLE_ADMIN' => array('ROLE_USER', 'ROLE_ALLOWED_TO_SWITCH'),
-    )
-));
+    ));
