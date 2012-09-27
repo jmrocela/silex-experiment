@@ -12,9 +12,9 @@
  * Register custom providers and classes
  */
 $loader = \ComposerAutoloaderInit::getLoader();
-$loader->add('Solar', FRAMEWORK_DIR . 'Solar');
-$loader->add('Solar\\Providers', API_DIR . 'Solar' . DS . 'Providers');
-$loader->add('Solar\\Controllers', API_DIR . 'Solar' . DS . 'Controllers');
+$loader->add('Solar', FRAMEWORK_DIR);
+$loader->add('Solar\\Providers', API_DIR);
+$loader->add('Solar\\Controllers', API_DIR);
 
 /**
  * register our simple mongodb handler
@@ -88,15 +88,11 @@ $app->register(new Solar\Providers\OPAuthServiceProvider(), array(
  */
 $app->register(new Silex\Provider\SecurityServiceProvider(), array(
         'security.firewalls' => array(
-            'secure' => array(
-                'pattern' => '^/',
-                'anonymous' => true
-            )
-        ),
-        'security.access_rules' => array(
-            array('^/', 'ROLE_USER')
-        ),
-        'security.role_hierarchy' => array(
-            'ROLE_ADMIN' => array('ROLE_USER', 'ROLE_ALLOWED_TO_SWITCH'),
-        )
+			'secure' => array(
+				'pattern' => '^/',
+				'anonymous' => true
+			)
+		),
+        'security.access_rules' => array(),
+        'security.role_hierarchy' => array()
     ));

@@ -2,7 +2,9 @@
 
 namespace Solar\Controllers;
 
-class UserController extends Solar\Controller {
+use Solar\Controller;
+
+class UserController extends Controller {
 
 	public function auth()
 	{

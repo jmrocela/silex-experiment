@@ -2,7 +2,9 @@
 
 namespace Solar\Controllers;
 
-class FrontendController extends Solar\Controller
+use Solar\Controller;
+
+class FrontendController extends Controller
 {
 
 	public function index()

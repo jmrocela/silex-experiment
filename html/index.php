@@ -14,7 +14,7 @@ define('ROOT_DIR', dirname(PUBLIC_DIR) . DS);
 define('TEMP_DIR', ROOT_DIR . 'tmp' . DS);
 define('FRAMEWORK_DIR', ROOT_DIR . 'framework' . DS);
 define('API_DIR', ROOT_DIR . 'api' . DS);
-define('TEMPLATE_DIR', API_DIR . 'templates' . DS);
+define('TEMPLATE_DIR', ROOT_DIR . 'html' . DS . 'views');
 
 // Require the Confiugration and Constants
 require_once FRAMEWORK_DIR . 'config.php';

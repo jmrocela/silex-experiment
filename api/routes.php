@@ -22,7 +22,7 @@ return array(
 				array(
 					'name' => null, // named routes
 					'pattern' => '/', // route
-					'path' => 'Index/Index', // controller
+					'path' => 'Frontend/Index', // controller
 					'method' => null, 
 					'accept' => 'json', // return format for the request, defaults to whatever is in http-accept
 					'locale' => null, // defaults to site config

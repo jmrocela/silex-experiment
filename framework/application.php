@@ -72,7 +72,7 @@ foreach ($routes as $site => $handles) {
 		    ->before(function(Request $request) use ($app, $route) {
 				// prepare the names and method
 				$controller = explode('/', $route['path']);
-				$route_handle = $controller[0] . 'Controller';
+				$route_handle = 'Solar\\Controllers\\' . $controller[0] . 'Controller';
 				$app->method = $controller[1];
 
 				// I have the power!
@@ -107,7 +107,8 @@ foreach ($routes as $site => $handles) {
 
 		    	// where are our templates located?
 		    	if ($content_type == DEFAULT_CONTENT_TYPE) {
-			    	$template = (!empty($route['template'])) ? $route['template']: str_replace('controller', '', strtolower(get_class($app->handle))) . DS . strtolower($app->method);
+			    	$template = (!empty($route['template'])) ? $route['template']: str_replace('controller', '', strtolower(str_replace("Solar\\Controllers\\", "", get_class($app->handle)))) . DS . strtolower($app->method);
+
 			    	// generate the rendered template
 					$rendered = $app->handle->render($template, $response);
 
@@ -160,10 +161,10 @@ $app->error(function (\Exception $e, $code) use($app) {
 				return new Response(json_encode(array('type' => 'SprintGenericError', 'error' => 'There seems to be a problem with our Code. Don\'t worry, we are working on this right now.' . $debug, 'code' => $code)), $code, array('content-type' => 'application/json'));
 			break;
 	        case 405:
-				return new Response(json_encode(array('type' => 'SprintGenericError', 'error' => 'Method is not allowed. Please refer to our Documenation at http://springload.com/api/docs/' . $debug, 'code' => $code)), $code, array('content-type' => 'application/json'));
+				return new Response(json_encode(array('type' => 'SprintGenericError', 'error' => 'Method is not allowed. Please refer to our Documenation at http://wanderlust.com/api/docs/' . $debug, 'code' => $code)), $code, array('content-type' => 'application/json'));
 			break;
 	        case 404:
-				return new Response(json_encode(array('type' => 'SprintGenericError', 'error' => 'You cannot access this URL directly. The namespace and action does not exist. Please refer to our Documenation at http://springload.com/api/docs/' . $debug, 'code' => $code)), $code, array('content-type' => 'application/json'));
+				return new Response(json_encode(array('type' => 'SprintGenericError', 'error' => 'You cannot access this URL directly. The namespace and action does not exist. Please refer to our Documenation at http://wanderlust.com/api/docs/' . $debug, 'code' => $code)), $code, array('content-type' => 'application/json'));
 			break;
 	        case 403:
 				return new Response(json_encode(array('type' => 'SprintGenericError', 'error' => 'You are unauthorized to perform this action. Please make sure your API key and API secret is valid.' . $debug, 'code' => $code)), $code, array('content-type' => 'application/json'));
@@ -171,7 +172,7 @@ $app->error(function (\Exception $e, $code) use($app) {
 	    }
 
 	} else {
-		$controller = new FrontendController();
+		$controller = new Solar\Controllers\FrontendController();
 				
 		// execute the handlers
 		$request = $controller->before(new Request());
@@ -186,5 +187,3 @@ $app->error(function (\Exception $e, $code) use($app) {
 
 	}
 });
-
-// --- EOF
