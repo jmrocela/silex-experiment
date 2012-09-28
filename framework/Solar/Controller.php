@@ -39,20 +39,26 @@ class Controller {
 	{
         $this->requestFormat = $app['request_format'];
         $this->locale = $app['locale'];
-		//$this->session = $app['session'];
+		$this->session = $app['session'];
 		$this->security = $app['security'];
 		$this->log = $app['monolog'];
-		//$this->mongo = $app['mongo'];
+		$this->mongo = $app['mongo'];
 		$this->view = $app['view'];
 		$this->firewalls = $app['security.firewalls'];
+		
+		// template globals
+		$this->template_globals = array(
+					'session' => array(),
+					'user' => array()
+				);
 	}
 
-	public function render($template, Response $response)
+	public function render($template, Response $response, $layout = 'default')
 	{
-		return $this->_render($template, $response);
+		return $this->_render($template, $response, $layout);
 	}
 
-	protected function _render($template, Response $response)
+	protected function _render($template, Response $response, $layout = 'default')
 	{	
 		$response = $response->getContent();
 		/**
@@ -60,7 +66,7 @@ class Controller {
 		 * else, we do nothing and render the whole page as html.
 		 */
 		$view = $this->view;
-		return $view($template, (array) json_decode($response));
+		return $view('layouts' . DS . $layout, $this->template_globals)->nest('body', $view($template, (array) json_decode($response)));
 	}
 
 }

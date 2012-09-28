@@ -10,9 +10,36 @@ return array(
 	WWW_HOST => array(
 		'prefix' => WWW_HOST_PATH,
 		'routes' => array(
-				array('pattern' => '/', 'path' => 'Frontend/index'),
-				array('pattern' => '/secure/login', 'path' => 'User/login'),
-				array('pattern' => '/secure/logout', 'path' => 'User/logout')
+				// generic pages
+				array('pattern' => '/', 'path' => 'Frontend/index', 'layout' => 'home'),
+				array('pattern' => '/about/', 'path' => 'Frontend/about', 'layout' => 'generic'),
+				array('pattern' => '/features/', 'path' => 'Frontend/features', 'layout' => 'generic'),
+				array('pattern' => '/developer/', 'path' => 'Frontend/developer', 'layout' => 'developer'),
+				array('pattern' => '/press/', 'path' => 'Frontend/press', 'layout' => 'press'),
+				array('pattern' => '/privacy/', 'path' => 'Frontend/privacy', 'layout' => 'generic'),
+				array('pattern' => '/terms/', 'path' => 'Frontend/terms', 'layout' => 'generic'),
+				
+				// secure pages
+				array('pattern' => '/secure/signup', 'path' => 'User/signup', 'layout' => 'user'),
+				array('pattern' => '/secure/login', 'path' => 'User/login', 'layout' => 'user'),
+				array('pattern' => '/secure/activate', 'path' => 'User/activate', 'layout' => 'user'),
+				array('pattern' => '/secure/reset', 'path' => 'User/reset', 'layout' => 'user'),
+				array('pattern' => '/secure/logout', 'path' => 'User/logout', 'layout' => 'user'),
+				
+				// advanced search
+				
+				// geo profiles
+				
+				// user dashboard & settings
+				
+				// user profiles
+				
+				// itineraries
+				
+				// itinerary builder
+				
+				// links, photos, videos, stamps, and achievements single page
+				
 			)
 	),
 

@@ -42,6 +42,9 @@ foreach ($routes as $site => $handles) {
 			
 			// in case we have a converter method
 			$convert_name = (isset($route['converter']['name'])) ? $route['converter']['name']: null;
+			
+			// let's set the layout
+			$route['layout'] = (isset($route['layout'])) ? $route['layout']: 'default';
 		    
 			/**
 			 * THERE SHOULD BE A BETTER WAY OF DOING THIS RATHER
@@ -110,7 +113,7 @@ foreach ($routes as $site => $handles) {
 			    	$template = (!empty($route['template'])) ? $route['template']: str_replace('controller', '', strtolower(str_replace("Solar\\Controllers\\", "", get_class($app->handle)))) . DS . strtolower($app->method);
 
 			    	// generate the rendered template
-					$rendered = $app->handle->render($template, $response);
+					$rendered = $app->handle->render($template, $response, $route['layout']);
 
 					// return the response
 					return new Response($rendered, 200,  array('content-type' => $content_type));

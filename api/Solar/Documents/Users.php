@@ -10,88 +10,36 @@ class User {
 
     /** @ODM\Id */
     private $id;
-
-    public function getId()
-    {
-        return $this->id;
-    }
-
-	/** @ODM\Field(type="string") */
+    
+    /** @ODM\Field(type="bigint") */
     private $user_id;
-
-    public function setUserId($val = null)
-    {
-    	$this->user_id = $val;
-    }
-
-    public function getUserId()
-    {
-    	return $this->user_id;
-    }
-
-	/** @ODM\Field(type="string") */
+    
+    /** @ODM\Field(type="string") */
+    private $hash;
+    
+    /** @ODM\Field(type="string") */
     private $username;
-
-    public function setUsername($val = null)
-    {
-    	$this->username = $val;
-    }
-
-    public function getUsername()
-    {
-    	return $this->username;
-    }
-
-	/** @ODM\Field(type="string") */
+    
+    /** @ODM\Field(type="string") */
     private $password;
-
-    public function setPassword($val = null)
-    {
-    	$this->password = $val;
-    }
-
-    public function getPassword()
-    {
-    	return $this->password;
-    }
-
-	/** @ODM\Field(type="string") */
-    private $email;
-
-    public function setEmail($val = null)
-    {
-    	$this->email = $val;
-    }
-
-    public function getEmail()
-    {
-    	return $this->email;
-    }
-
-	/** @ODM\Field(type="string") */
-    private $first_name;
-
-    public function setFirstName($val = null)
-    {
-    	$this->first_name = $val;
-    }
-
-    public function getFirstName()
-    {
-    	return $this->first_name;
-    }
-
-	/** @ODM\Field(type="string") */
-    private $last_name;
-
-    public function setLastName($val = null)
-    {
-    	$this->last_name = $val;
-    }
-
-    public function getLastName()
-    {
-    	return $this->last_name;
-    }
+    
+    /** @ODM\Field(type="string") */
+    private $status_code;
+    
+    /** @ODM\Field(type="string") */
+    private $created;
+    
+    /** @ODM\Field(type="string") */
+    private $activation_key;
+    
+    /** @ODM\Field(type="string") */
+    private $activation_time;
+    
+    /** @ODM\Field(type="string") */
+    private $last_login;
+    
+    private $information = array();
+    
+    private $counter = array();
 
 }
