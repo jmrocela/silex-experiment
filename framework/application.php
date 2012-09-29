@@ -29,7 +29,7 @@ $app['request_format'] = $app->share(function() {
 // get the lazy header
 $app['lazy_load'] = $app->share(function() {
 	$request = Request::createFromGlobals();
-	return $request->headers->get('Lazy');
+	return $request->headers->get('Lazy'); // change this to 1 if you need to test lazy loading
 });
 
 // apply our routes
@@ -71,6 +71,7 @@ foreach ($routes as $site => $handles) {
 					
 					// call the method from our instance
 					$response = call_user_func_array(array($app->handle, $method), $args);
+					
 					$response = (is_string($response)) ? $response: json_encode($response);
 					return new Response($response);
 				} else {
@@ -97,7 +98,7 @@ foreach ($routes as $site => $handles) {
 
 				// get the lazy header
 				$app['lazy_load'] = $app->share(function() use ($route, $request) {
-					return (isset($route['lazy'])) ? $route['lazy']: $request->headers->get('Lazy');
+					return (isset($route['lazy'])) ? $route['lazy']: $app['lazy_load'];
 				});
 
 				// set locale
@@ -121,7 +122,7 @@ foreach ($routes as $site => $handles) {
 		    	// where are our templates located?
 		    	if ($content_type == DEFAULT_CONTENT_TYPE) {
 			    	$template = (!empty($route['template'])) ? $route['template']: str_replace('controller', '', strtolower(str_replace("Solar\\Controllers\\", "", get_class($app->handle)))) . DS . strtolower($app->method);
-
+					
 					// generate the rendered template
 					$rendered = $app->handle->render($template, $response, $route['layout']);
 

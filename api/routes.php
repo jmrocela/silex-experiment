@@ -52,6 +52,7 @@ return array(
 		'routes' => array(
 				array(
 					'name' => null, // named routes
+					'title' => null, // named routes
 					'pattern' => '/', // route
 					'path' => 'Frontend/Index', // controller
 					'method' => null, 

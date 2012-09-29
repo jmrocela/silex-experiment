@@ -15,6 +15,7 @@ $loader = \ComposerAutoloaderInit::getLoader();
 $loader->add('Solar', FRAMEWORK_DIR);
 $loader->add('Solar\\Providers', API_DIR);
 $loader->add('Solar\\Controllers', API_DIR);
+$loader->add('Solar\\Widgets', API_DIR);
 
 /**
  * register our simple mongodb handler
@@ -59,6 +60,7 @@ $app->register(new Silex\Provider\MonologServiceProvider(), array(
  */
 $app->register(new Solar\Providers\MustacheServiceProvider(), array(
         'mustache.template_dir' => TEMPLATE_DIR,
+        'mustache.partials_dir' => TEMPLATE_DIR,
         'mustache.cache_dir' => TEMP_DIR . 'cache',
         'mustache.extension' => '.ms'
     ));

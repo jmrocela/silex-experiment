@@ -18,7 +18,16 @@ class MustacheServiceProvider implements ServiceProviderInterface {
                 'loader' => new \Mustache_Loader_FilesystemLoader(
                     $app['mustache.template_dir'],
                     array('extension' => $app['mustache.extension'])
-                )
+                ),
+				'partials_loader' => new \Mustache_Loader_FilesystemLoader(
+                    $app['mustache.partials_dir'],
+                    array('extension' => $app['mustache.extension'])
+                ),
+				'escape' => function($value) {
+					return $value;
+					// why does it default to the line below?
+					// return htmlspecialchars($value, ENT_COMPAT, 'UTF-8');
+				}
             ));
             return $mustache;
         });

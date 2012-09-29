@@ -10,6 +10,9 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width">
   <title>Sprintport. Make Travel Social.</title>
+  <script type="text/javascript">
+	var widgets = [];
+  </script>
 <body>
 {{body}}
 </body>

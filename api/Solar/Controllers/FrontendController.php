@@ -5,7 +5,7 @@ namespace Solar\Controllers;
 use Silex\Application;
 use Solar\Controller;
 use Solar\View;
-use Solar\Widget;
+use Solar\Widgets;
 
 class FrontendController extends Controller
 {
@@ -17,7 +17,12 @@ class FrontendController extends Controller
 
 	public function index()
 	{
-		return array();
+		return array(
+				'widgets' => array(
+						'testbox' => 'index'
+					)
+				
+			);
 	}
 
 	public function about()
