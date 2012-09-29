@@ -11,8 +11,17 @@ use Silex\Application;
  */
 class Widget extends \ArrayObject implements ViewInterface
 {
-    private $view;
+    private $widget;
     private $callback;
+	private $data = array();
+	
+	public function __construct($data = array()) {
+		$this->with($data);
+	}
+	
+	public function create() {
+		return $this;
+	}
 
     /**
      * Create a new widget instance.
@@ -21,9 +30,10 @@ class Widget extends \ArrayObject implements ViewInterface
      * @param \Closure      $callback
      * @return void
      */
-    public function __construct(ViewInterface $view, $callback = null)
+    public function attach(ViewInterface $view, $callback = null)
     {
-        $this->view = $view;
+        $this->widget = $view;
+		$this->template = $view->template;
         $this->callback = $callback;
     }
 
@@ -68,12 +78,11 @@ class Widget extends \ArrayObject implements ViewInterface
      */
     public function render($data = array())
     {
-		echo $this->template;
         if ($callback = $this->callback) {
             $this->with($callback($this));
         }
 
-        return $this->view->render($this);
+        return $this->widget->render($this);
     }
 
     /**

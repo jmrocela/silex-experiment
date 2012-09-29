@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 class Controller {
 
 	private $app;
-	
+
 	private $requestFormat = 'application/json';
 	
 	private $locale = 'en-US';
@@ -22,26 +22,19 @@ class Controller {
 	private $mongo = null;
 	
 	private $mustache = null;
+	
+	private $widgets = array();
 
 	public function __construct(Application $app)
-	{
-		$this->app = $app;
-	
-        $this->requestFormat = $app['request_format'];
-        $this->locale = $app['locale'];
-		$this->session = $app['session'];
-		$this->security = $app['security'];
-		$this->log = $app['monolog'];
-		$this->mongo = $app['mongo'];
-		$this->view = $app['view'];
-		$this->firewalls = $app['security.firewalls'];
+	{		
+		// inject this context with required stuff from the app object
+		$this->inject($this, $app);
 		
 		// conditions
 		$this->isLazy = ($app['lazy_load'] == 1) ? true: false;
 		
 		// template globals
 		$this->template_globals = array(
-					'test' => 1,
 					'is_lazy' => $this->isLazy,
 					'session' => array(),
 					'user' => array()
@@ -58,6 +51,34 @@ class Controller {
 	public function after(Request $request, Response $response)
 	{
 		return $response;
+	}
+	
+	public function apply($response)
+	{
+		return array_merge($this->widgets, $response);
+	}
+	
+	public function addWidget($id, Widget $widget)
+	{
+		if (!isset($this->widgets[$id])) {
+			$widget = $this->inject($widget, $this->app);
+			$this->widgets[$id] = $widget->create()->render();
+		}
+	}
+	
+	public function inject($target, $with)
+	{
+		// we store app somewhere for reference
+		$target->app = $with;
+		
+        $target->requestFormat = $with['request_format'];
+        $target->locale = $with['locale'];
+		$target->session = $with['session'];
+		$target->security = $with['security'];
+		$target->log = $with['monolog'];
+		$target->mongo = $with['mongo'];
+		$target->view = $with['view'];
+		return $target;
 	}
 
 	public function render($template, Response $response, $layout = 'default')
@@ -83,7 +104,7 @@ class Controller {
 				if ($this->isLazy) {
 					$rendered->nest($key, "<script type=\"text/javascript\" data-template=\"$widget\" class=\"widget-load-later lazy-load\">templates.push('widgets" . DS . $widget . "')</script>");
 				} else {
-					$rendered->nest($key, $view('widgets' . DS . $widget));
+					$rendered->nest($key, $widget);
 				}
 			}
 		}

@@ -71,6 +71,9 @@ foreach ($routes as $site => $handles) {
 					
 					// call the method from our instance
 					$response = call_user_func_array(array($app->handle, $method), $args);
+
+					// we have another set of returns just for the widgets
+					$response = $app->handle->apply($response);
 					
 					$response = (is_string($response)) ? $response: json_encode($response);
 					return new Response($response);

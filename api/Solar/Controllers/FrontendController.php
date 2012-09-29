@@ -17,12 +17,9 @@ class FrontendController extends Controller
 
 	public function index()
 	{
-		return array(
-				'widgets' => array(
-						'testbox' => 'index'
-					)
-				
-			);
+		$this->addWidget('testbox', new Widgets\IndexWidget(array('test' => 1)));
+	
+		return array();
 	}
 
 	public function about()
