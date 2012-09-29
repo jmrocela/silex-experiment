@@ -48,7 +48,7 @@ class Controller {
 		
 		// template globals
 		$this->template_globals = array(
-					'session' => array(),
+					'session' => array('test' => 1),
 					'user' => array()
 				);
 	}
@@ -57,17 +57,29 @@ class Controller {
 	{
 		return $this->_render($template, $response, $layout);
 	}
-
+	
+	public function lazy(Response $response)
+	{
+		return $this->_lazy($response);
+	}
+	
 	protected function _render($template, Response $response, $layout = 'default')
 	{	
 		$response = $response->getContent();
-		/**
-		 * if lazy is on, just return the response as json or
-		 * else, we do nothing and render the whole page as html.
-		 */
+		
 		$view = $this->view;
-		return $view('layouts' . DS . $layout, $this->template_globals)->nest('body', $view($template, (array) json_decode($response)));
+		$template_vars = array_merge($this->template_globals, (array) json_decode($response));
+		
+		return $view('layouts' . DS . $layout, $template_vars)
+					->nest('body', $view($template));
 	}
+	
+	public function _lazy(Response $response)
+	{
+		$view = $this->view;
+		return $view('lazy');
+	}
+
 
 }
 
