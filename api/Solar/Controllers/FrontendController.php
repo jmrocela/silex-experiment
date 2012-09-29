@@ -2,10 +2,18 @@
 
 namespace Solar\Controllers;
 
+use Silex\Application;
 use Solar\Controller;
+use Solar\View;
+use Solar\Widget;
 
 class FrontendController extends Controller
 {
+
+	public function __construct(Application $app)
+	{
+		parent::__construct($app);
+	}
 
 	public function index()
 	{

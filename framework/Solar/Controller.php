@@ -21,7 +21,28 @@ class Controller {
 	
 	private $mustache = null;
 
-	public function __construct() {}
+	public function __construct(Application $app)
+	{
+        $this->requestFormat = $app['request_format'];
+        $this->locale = $app['locale'];
+		$this->session = $app['session'];
+		$this->security = $app['security'];
+		$this->log = $app['monolog'];
+		$this->mongo = $app['mongo'];
+		$this->view = $app['view'];
+		$this->firewalls = $app['security.firewalls'];
+		
+		// conditions
+		$this->isLazy = $app['lazy_load'];
+		
+		// template globals
+		$this->template_globals = array(
+					'test' => 1,
+					'test2' => 2,
+					'session' => array(),
+					'user' => array()
+				);
+	}
 
 	public function __destruct() {}
 
@@ -35,49 +56,26 @@ class Controller {
 		return $response;
 	}
 
-	public function apply(Application $app)
-	{
-        $this->requestFormat = $app['request_format'];
-        $this->locale = $app['locale'];
-		$this->session = $app['session'];
-		$this->security = $app['security'];
-		$this->log = $app['monolog'];
-		$this->mongo = $app['mongo'];
-		$this->view = $app['view'];
-		$this->firewalls = $app['security.firewalls'];
-		
-		// template globals
-		$this->template_globals = array(
-					'session' => array('test' => 1),
-					'user' => array()
-				);
-	}
-
 	public function render($template, Response $response, $layout = 'default')
 	{
 		return $this->_render($template, $response, $layout);
 	}
 	
-	public function lazy(Response $response)
-	{
-		return $this->_lazy($response);
-	}
-	
 	protected function _render($template, Response $response, $layout = 'default')
 	{	
-		$response = $response->getContent();
+		$response = (array) json_decode($response->getContent());
 		
+		// assign this shiz
 		$view = $this->view;
-		$template_vars = array_merge($this->template_globals, (array) json_decode($response));
+		$template_vars = array_merge($this->template_globals, $response);
 		
-		return $view('layouts' . DS . $layout, $template_vars)
-					->nest('body', $view($template));
+		// render the templates
+		return $view('layouts' . DS . $layout, $template_vars)->nest('body', $view($template));
 	}
 	
-	public function _lazy(Response $response)
+	public function generateLazyHook($name)
 	{
-		$view = $this->view;
-		return $view('lazy');
+	
 	}
 
 

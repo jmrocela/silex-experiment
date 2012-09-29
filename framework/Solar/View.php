@@ -2,7 +2,7 @@
 
 namespace Solar;
 
-use \Solar\ViewInterface;
+use Solar\ViewInterface;
 
 /**
  * @brief       Nestable view container with rendering callback.
@@ -77,21 +77,10 @@ class View extends \ArrayObject implements ViewInterface
         if (!($view instanceof ViewInterface)) {
             $view = new View((string) $view);
         }
-
+		
         $this[$key] = $view->with($this);
-
         return $this;
     }
-	
-	public function apply()
-	{
-		$data = array_merge(func_get_args());
-        foreach ($data as $key => $value) {
-            $this[$key] = $value;
-        }
-	
-		return $this;
-	}
 
     /**
      * Get the evaluated string content of the view.

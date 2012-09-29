@@ -26,6 +26,12 @@ $app['request_format'] = $app->share(function() {
 	return $request->headers->get('Accept');
 });
 
+// get the lazy header
+$app['lazy_load'] = $app->share(function() {
+	$request = Request::createFromGlobals();
+	return $request->headers->get('Lazy');
+});
+
 // apply our routes
 foreach ($routes as $site => $handles) {
 
@@ -79,7 +85,7 @@ foreach ($routes as $site => $handles) {
 				$app->method = $controller[1];
 
 				// I have the power!
-				$app->handle = new $route_handle();
+				$app->handle = new $route_handle($app);
 				
 				// execute the before handler if there is
 				$request = $app->handle->before($request);
@@ -89,7 +95,7 @@ foreach ($routes as $site => $handles) {
 					return (isset($route['accept'])) ? $route['accept']: $request->headers->get('Accept');
 				});
 
-				// get the request accept header
+				// get the lazy header
 				$app['lazy_load'] = $app->share(function() use ($route, $request) {
 					return (isset($route['lazy'])) ? $route['lazy']: $request->headers->get('Lazy');
 				});
@@ -101,7 +107,6 @@ foreach ($routes as $site => $handles) {
 				
 				// attach some traits
 				$app->handle->request = $request;
-				$app->handle->apply($app);
 		    })
 		    ->after(function(Request $request, Response $response) use ($app, $route) {
 		    	// catch errors
@@ -117,16 +122,8 @@ foreach ($routes as $site => $handles) {
 		    	if ($content_type == DEFAULT_CONTENT_TYPE) {
 			    	$template = (!empty($route['template'])) ? $route['template']: str_replace('controller', '', strtolower(str_replace("Solar\\Controllers\\", "", get_class($app->handle)))) . DS . strtolower($app->method);
 
-					/**
-					 * if lazy is on, just return the response as json or
-					 * else, we do nothing and render the whole page as html.
-					 */
-					if ($app['lazy_load']) {
-						$rendered = $app->handle->lazy($response);
-					} else {
-						// generate the rendered template
-						$rendered = $app->handle->render($template, $response, $route['layout']);
-					}
+					// generate the rendered template
+					$rendered = $app->handle->render($template, $response, $route['layout']);
 
 					// return the response
 					return new Response($rendered, 200,  array('content-type' => $content_type));

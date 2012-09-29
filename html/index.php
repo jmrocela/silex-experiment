@@ -14,7 +14,8 @@ define('ROOT_DIR', dirname(PUBLIC_DIR) . DS);
 define('TEMP_DIR', ROOT_DIR . 'tmp' . DS);
 define('FRAMEWORK_DIR', ROOT_DIR . 'framework' . DS);
 define('API_DIR', ROOT_DIR . 'api' . DS);
-define('TEMPLATE_DIR', ROOT_DIR . 'html' . DS . 'views');
+define('TEMPLATE_DIR', ROOT_DIR . 'html' . DS . 'views'); // no trailing slash because of mustache
+define('WIDGET_DIR', ROOT_DIR . 'html' . DS . 'views' . DS . 'widgets' . DS);
 
 // Require the Confiugration and Constants
 require_once FRAMEWORK_DIR . 'config.php';

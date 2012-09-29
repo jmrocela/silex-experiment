@@ -20,19 +20,23 @@ return array(
 				array('pattern' => '/terms/', 'path' => 'Frontend/terms', 'layout' => 'generic'),
 				
 				// secure pages
-				array('pattern' => '/secure/signup', 'path' => 'User/signup', 'layout' => 'user'),
-				array('pattern' => '/secure/login', 'path' => 'User/login', 'layout' => 'user'),
-				array('pattern' => '/secure/activate', 'path' => 'User/activate', 'layout' => 'user'),
-				array('pattern' => '/secure/reset', 'path' => 'User/reset', 'layout' => 'user'),
-				array('pattern' => '/secure/logout', 'path' => 'User/logout', 'layout' => 'user'),
+				array('pattern' => '/secure/signup/', 'path' => 'User/signup', 'layout' => 'user'),
+				array('pattern' => '/secure/login/', 'path' => 'User/login', 'layout' => 'user'),
+				array('pattern' => '/secure/activate/', 'path' => 'User/activate', 'layout' => 'user'),
+				array('pattern' => '/secure/reset/', 'path' => 'User/reset', 'layout' => 'user'),
+				array('pattern' => '/secure/logout/', 'path' => 'User/logout', 'layout' => 'user'),
 				
 				// advanced search
+				array('pattern' => '/search/', 'path' => 'Search/index'),
 				
 				// geo profiles
-				
-				// user dashboard & settings
+				array('pattern' => '/{profile_id}/', 'path' => 'Profile/mixed'),
+				array('pattern' => '/{profile_id}/{profile_child}/', 'path' => 'Profile/hasChild'),
 				
 				// user profiles
+				array('pattern' => '/u/{profile_id}/', 'path' => 'Profile/user'),
+				
+				// user dashboard & settings
 				
 				// itineraries
 				

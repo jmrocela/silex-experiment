@@ -35,16 +35,6 @@ class MustacheServiceProvider implements ServiceProviderInterface {
             // TODO: check if this pollutes the view container!
             return $view->with($data);
         });
-
-        // Widget factory service
-        $app['widget'] = $app->protect(function ($view, $callback = null) use ($app) {
-            static $widgets = array();
-            if (!array_key_exists($template, $widgets)) {
-                $widgets[$template] = $widget = new Widget($view, $callback);
-            }
-
-            return $widgets[$template]->with($data);
-        });
     }
 
     public function boot(Application $app) {}
