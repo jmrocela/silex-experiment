@@ -12,26 +12,24 @@ return array(
 		'routes' => array(
 				// generic pages
 				array('pattern' => '/', 'path' => 'Frontend/index', 'layout' => 'home'),
-				array('pattern' => '/about/', 'path' => 'Frontend/about', 'layout' => 'generic'),
-				array('pattern' => '/features/', 'path' => 'Frontend/features', 'layout' => 'generic'),
+				array('pattern' => '/company/', 'path' => 'Frontend/company', 'layout' => 'generic'),
+				array('pattern' => '/brag/', 'path' => 'Frontend/brag', 'layout' => 'generic'),
 				array('pattern' => '/developer/', 'path' => 'Frontend/developer', 'layout' => 'developer'),
-				array('pattern' => '/press/', 'path' => 'Frontend/press', 'layout' => 'press'),
+				array('pattern' => '/help/', 'path' => 'Frontend/help', 'layout' => 'help'),
 				array('pattern' => '/privacy/', 'path' => 'Frontend/privacy', 'layout' => 'generic'),
 				array('pattern' => '/terms/', 'path' => 'Frontend/terms', 'layout' => 'generic'),
+				//array('pattern' => '/careers/', 'path' => 'Frontend/careers', 'layout' => 'generic'),
 				
 				// secure pages
-				array('pattern' => '/secure/signup/', 'path' => 'User/signup', 'layout' => 'user'),
-				array('pattern' => '/secure/login/', 'path' => 'User/login', 'layout' => 'user'),
+				array('pattern' => '/secure/signup/', 'path' => 'User/signup', 'layout' => 'user', 'name' => 'register'),
+				array('pattern' => '/secure/login/', 'path' => 'User/login', 'layout' => 'user', 'name' => 'login'),
 				array('pattern' => '/secure/activate/', 'path' => 'User/activate', 'layout' => 'user'),
 				array('pattern' => '/secure/reset/', 'path' => 'User/reset', 'layout' => 'user'),
 				array('pattern' => '/secure/logout/', 'path' => 'User/logout', 'layout' => 'user'),
+				array('pattern' => '/secure/process/{where}', 'path' => 'User/process', 'layout' => 'new_user'),
 				
 				// advanced search
 				array('pattern' => '/search/', 'path' => 'Search/index'),
-				
-				// geo profiles
-				array('pattern' => '/{profile_id}/', 'path' => 'Profile/mixed'),
-				array('pattern' => '/{profile_id}/{profile_child}/', 'path' => 'Profile/hasChild'),
 				
 				// user profiles
 				array('pattern' => '/u/{profile_id}/', 'path' => 'Profile/user'),
@@ -44,6 +42,10 @@ return array(
 				
 				// links, photos, videos, stamps, and achievements single page
 				
+				// geo profiles
+				array('pattern' => '/{profile_id}/', 'path' => 'Profile/mixed'),
+				array('pattern' => '/{profile_id}/{profile_child}/', 'path' => 'Profile/hasChild'),
+				array('pattern' => '/{profile_id}/{profile_child}/{profile_view}/', 'path' => 'Profile/hasChild')
 			)
 	),
 

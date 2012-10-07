@@ -23,6 +23,7 @@ class MustacheServiceProvider implements ServiceProviderInterface {
                     $app['mustache.partials_dir'],
                     array('extension' => $app['mustache.extension'])
                 ),
+                'helpers' => $app['mustache.helpers'],
 				'escape' => function($value) {
 					return $value;
 					// why does it default to the line below?

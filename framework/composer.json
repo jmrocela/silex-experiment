@@ -17,6 +17,8 @@
         "opauth/opauth": "*",
         "opauth/facebook": "*",
         "opauth/google": "*",
-        "opauth/twitter": "*"
+        "opauth/twitter": "*",
+		
+		"ruflin/elastica": "*"
     }
 }

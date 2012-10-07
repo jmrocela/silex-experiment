@@ -1,4 +1,1 @@
-Just for the Homepage
-
-{{testbox}}
-{{testbox2}}
+<p>This is the bare homepage</p>

@@ -35,6 +35,8 @@ class Controller {
 		
 		// template globals
 		$this->template_globals = array(
+					'WWW_HOST' => WWW_HOST,
+					'API_HOST' => API_HOST,
 					'is_lazy' => $this->isLazy,
 					'session' => array(),
 					'user' => array()
@@ -55,14 +57,18 @@ class Controller {
 	
 	public function apply($response)
 	{
-		return array_merge($this->widgets, $response);
+		if ($this->widgets) {
+			return array_merge(array('widgets' => $this->widgets), $response);
+		}
+		return $response;
 	}
 	
 	public function addWidget($id, Widget $widget)
 	{
 		if (!isset($this->widgets[$id])) {
 			$widget = $this->inject($widget, $this->app);
-			$this->widgets[$id] = $widget->create()->render();
+			$widget->create();
+			$this->widgets[$id] = ($this->isLazy) ? $widget->template: $widget->render();
 		}
 	}
 	
@@ -102,7 +108,7 @@ class Controller {
 			$widgets = array_reverse((array) $response['widgets']); // i have no idea why it parses in reverse.
 			foreach ($widgets as $key => $widget) {
 				if ($this->isLazy) {
-					$rendered->nest($key, "<script type=\"text/javascript\" data-template=\"$widget\" class=\"widget-load-later lazy-load\">templates.push('widgets" . DS . $widget . "')</script>");
+					$rendered->nest($key, "<script type=\"text/javascript\" data-template=\"$widget\" class=\"widget-load-later lazy-load\">templates.push('" . $widget . "')</script>");
 				} else {
 					$rendered->nest($key, $widget);
 				}

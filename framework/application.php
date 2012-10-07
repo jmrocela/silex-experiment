@@ -48,6 +48,9 @@ foreach ($routes as $site => $handles) {
 			
 			// in case we have a converter method
 			$convert_name = (isset($route['converter']['name'])) ? $route['converter']['name']: null;
+
+			// bind the route to a name so we can call it easily later
+			$name = (isset($route['name'])) ? $route['name']: str_replace(array('/', '{', '}'), '_', strtolower($route['pattern']));
 			
 			// let's set the layout
 			$route['layout'] = (isset($route['layout'])) ? $route['layout']: 'default';
@@ -148,6 +151,7 @@ foreach ($routes as $site => $handles) {
 				}
 				return $param;
 		    })
+		    ->bind($name)
 			->method($method);
 		} 
 		
@@ -189,17 +193,17 @@ $app->error(function (\Exception $e, $code) use($app) {
 	    }
 
 	} else {
-		$controller = new Solar\Controllers\FrontendController();
+		$controller = new Solar\Controllers\FrontendController($app);
 				
 		// execute the handlers
 		$request = $controller->before(new Request());
 		$controller->requestFormat = $request->headers->get('Accept');
 		$controller->apply($app);
-		$response = new Response($controller->fourohfour());
+		$response = new Response($controller->error($code));
 		$response = $controller->after($request, $response);
 
 		// load our 404 template. we don't need anything else actually
-		$rendered = $controller->render('404', $response);
+		$rendered = $controller->render($code, $response);
 		return new Response($rendered, $code);
 
 	}

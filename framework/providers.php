@@ -15,6 +15,7 @@ $loader = \ComposerAutoloaderInit::getLoader();
 $loader->add('Solar', FRAMEWORK_DIR);
 $loader->add('Solar\\Providers', API_DIR);
 $loader->add('Solar\\Controllers', API_DIR);
+$loader->add('Solar\\Helpers', API_DIR);
 $loader->add('Solar\\Widgets', API_DIR);
 
 /**
@@ -56,13 +57,32 @@ $app->register(new Silex\Provider\MonologServiceProvider(), array(
     ));
 
 /**
+ * register our url_generator
+ */
+$app->register(new Silex\Provider\UrlGeneratorServiceProvider());
+
+/**
  * register our mustache provider
  */
 $app->register(new Solar\Providers\MustacheServiceProvider(), array(
         'mustache.template_dir' => TEMPLATE_DIR,
         'mustache.partials_dir' => TEMPLATE_DIR,
         'mustache.cache_dir' => TEMP_DIR . 'cache',
-        'mustache.extension' => '.ms'
+        'mustache.extension' => '.ms',
+        'mustache.helpers' => (array) new Solar\Helpers\MustacheHelper($app['url_generator'])
+    ));
+    
+/**
+ * register the elastic search service
+ */
+$app->register(new Solar\Providers\ElasticSearchServiceProvider(), array(
+        'elastic.config' => array(
+                'server' => '127.0.0.1:9200',
+                'protocol' => 'http'
+            ),
+        'elastic.indexes' => array(
+                'myindex' => 'mytype'
+            )
     ));
 
 /**

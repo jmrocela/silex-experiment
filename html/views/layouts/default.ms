@@ -12,8 +12,7 @@
   <title>Sprintport. Make Travel Social.</title>
 <body>
 
-
-Just for the Homepage
+{{body}}
 
 
 </body>

@@ -14,6 +14,20 @@
 	var widgets = [];
   </script>
 <body>
+
+<ul>
+	<li><a href="{{#link}}/{{/link}}">Home</a></li>
+	<li><a href="{{#link}}/company{{/link}}">Company</a></li>
+	<li><a href="{{#link}}/developer{{/link}}">Developer</a></li>
+	<li><a href="{{#link}}/brag{{/link}}">Show me Around</a></li>
+	<li><a href="{{#link}}/privacy{{/link}}">Privacy</a></li>
+	<li><a href="{{#link}}/terms{{/link}}">Terms</a></li>
+	<li><a href="{{#link}}/help{{/link}}">Help</a></li>
+</ul>
+
+<li><a href="{{#link_to}}login{{/link_to}}">User Login</a></li>
+<li><a href="{{#link_to}}register{{/link_to}}">Sign Up</a></li>
+
 {{body}}
 </body>
 </html>

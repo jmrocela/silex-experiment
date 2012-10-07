@@ -17,7 +17,7 @@
         "require": {
             "php": ">=5.3.0"
         },
-        "time": "2012-09-09 22:09:48",
+        "time": "2012-09-09 20:09:48",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -64,7 +64,7 @@
         "require": {
             "php": ">=5.2.4"
         },
-        "time": "2012-09-12 02:13:06",
+        "time": "2012-09-12 00:13:06",
         "type": "library",
         "installation-source": "source",
         "autoload": {
@@ -90,123 +90,6 @@
         ]
     },
     {
-        "name": "doctrine/common",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/doctrine/common",
-            "reference": "0fd55331b0c42f979e9337c2d0675e555b3e3966"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/doctrine/common/zipball/0fd55331b0c42f979e9337c2d0675e555b3e3966",
-            "reference": "0fd55331b0c42f979e9337c2d0675e555b3e3966",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.2"
-        },
-        "time": "2012-09-15 17:23:57",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.4.x-dev"
-            }
-        },
-        "installation-source": "source",
-        "autoload": {
-            "psr-0": {
-                "Doctrine\\Common": "lib/"
-            }
-        },
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Jonathan Wage",
-                "email": "jonwage@gmail.com",
-                "homepage": "http://www.jwage.com/"
-            },
-            {
-                "name": "Guilherme Blanco",
-                "email": "guilhermeblanco@gmail.com"
-            },
-            {
-                "name": "Roman Borschel",
-                "email": "roman@code-factory.org"
-            },
-            {
-                "name": "Benjamin Eberlei",
-                "email": "kontakt@beberlei.de"
-            },
-            {
-                "name": "Johannes Schmitt",
-                "email": "schmittjoh@gmail.com",
-                "homepage": "https://github.com/schmittjoh",
-                "role": "Developer of wrapped JMSSerializerBundle"
-            }
-        ],
-        "description": "Common Library for Doctrine projects",
-        "homepage": "http://www.doctrine-project.org",
-        "keywords": [
-            "collections",
-            "spl",
-            "eventmanager",
-            "annotations",
-            "persistence"
-        ]
-    },
-    {
-        "name": "symfony/console",
-        "version": "2.1.x-dev",
-        "version_normalized": "2.1.9999999.9999999-dev",
-        "target-dir": "Symfony/Component/Console",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/Console",
-            "reference": "v2.1.1"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/symfony/Console/zipball/v2.1.1",
-            "reference": "v2.1.1",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3"
-        },
-        "time": "2012-08-22 01:48:41",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.1-dev"
-            }
-        },
-        "installation-source": "source",
-        "autoload": {
-            "psr-0": {
-                "Symfony\\Component\\Console": ""
-            }
-        },
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "http://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony Console Component",
-        "homepage": "http://symfony.com"
-    },
-    {
         "name": "symfony/yaml",
         "version": "2.1.x-dev",
         "version_normalized": "2.1.9999999.9999999-dev",
@@ -225,7 +108,7 @@
         "require": {
             "php": ">=5.3.3"
         },
-        "time": "2012-08-22 01:48:41",
+        "time": "2012-08-21 23:48:41",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -255,18 +138,253 @@
         "homepage": "http://symfony.com"
     },
     {
+        "name": "opauth/opauth",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "git://github.com/uzyn/opauth.git",
+            "reference": "8b4f52b0278a64b8944024ea5b38d28b6ea20481"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/uzyn/opauth/zipball/8b4f52b0278a64b8944024ea5b38d28b6ea20481",
+            "reference": "8b4f52b0278a64b8944024ea5b38d28b6ea20481",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.2.0"
+        },
+        "suggest": {
+            "opauth/facebook": "Allows Facebook authentication",
+            "opauth/google": "Allows Google authentication",
+            "opauth/twitter": "Allows Twitter authentication"
+        },
+        "time": "2012-08-29 07:42:11",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "": "lib/Opauth/",
+                "Opauth": "lib/"
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "U-Zyn Chua",
+                "email": "chua@uzyn.com",
+                "homepage": "http://uzyn.com"
+            }
+        ],
+        "description": "Multi-provider authentication framework for PHP",
+        "homepage": "http://opauth.org",
+        "keywords": [
+            "OpenId",
+            "Authentication",
+            "oauth",
+            "twitter",
+            "google",
+            "facebook",
+            "auth",
+            "omniauth"
+        ]
+    },
+    {
+        "name": "opauth/google",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "git://github.com/uzyn/opauth-google.git",
+            "reference": "0.2.1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/uzyn/opauth-google/zipball/0.2.1",
+            "reference": "0.2.1",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.2.0",
+            "opauth/opauth": ">=0.2.0"
+        },
+        "time": "2012-09-10 18:35:04",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "": "."
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "U-Zyn Chua",
+                "email": "chua@uzyn.com",
+                "homepage": "http://uzyn.com"
+            }
+        ],
+        "description": "Google strategy for Opauth",
+        "homepage": "http://opauth.org",
+        "keywords": [
+            "Authentication",
+            "google",
+            "auth"
+        ]
+    },
+    {
+        "name": "opauth/twitter",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "git://github.com/uzyn/opauth-twitter.git",
+            "reference": "14f19113057121df957e76b9f07ffa750f060263"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/uzyn/opauth-twitter/zipball/14f19113057121df957e76b9f07ffa750f060263",
+            "reference": "14f19113057121df957e76b9f07ffa750f060263",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.2.0",
+            "opauth/opauth": ">=0.2.0"
+        },
+        "time": "2012-09-11 04:22:15",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "": "."
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "U-Zyn Chua",
+                "email": "chua@uzyn.com",
+                "homepage": "http://uzyn.com"
+            }
+        ],
+        "description": "Twitter strategy for Opauth",
+        "homepage": "http://opauth.org",
+        "keywords": [
+            "Authentication",
+            "twitter",
+            "auth"
+        ]
+    },
+    {
+        "name": "ruflin/Elastica",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/ruflin/Elastica",
+            "reference": "e5a8726cbba449ca28b8db408069afc2270fd4a1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/ruflin/Elastica/zipball/e5a8726cbba449ca28b8db408069afc2270fd4a1",
+            "reference": "e5a8726cbba449ca28b8db408069afc2270fd4a1",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2012-09-18 15:56:41",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "Elastica": "lib/"
+            }
+        },
+        "license": [
+            "Apache 2.0"
+        ],
+        "authors": [
+            {
+                "name": "Nicolas Ruflin",
+                "homepage": "http://ruflin.com/"
+            }
+        ],
+        "description": "Elasticsearch Client",
+        "homepage": "http://ruflin.github.com/Elastica/",
+        "keywords": [
+            "client",
+            "search"
+        ]
+    },
+    {
+        "name": "symfony/console",
+        "version": "2.1.x-dev",
+        "version_normalized": "2.1.9999999.9999999-dev",
+        "target-dir": "Symfony/Component/Console",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/Console",
+            "reference": "1fbfb98e6b976189947df1b519b029e0d967d3f5"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/symfony/Console/zipball/1fbfb98e6b976189947df1b519b029e0d967d3f5",
+            "reference": "1fbfb98e6b976189947df1b519b029e0d967d3f5",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "time": "2012-09-28 14:35:16",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.1-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "Symfony\\Component\\Console": ""
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "http://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony Console Component",
+        "homepage": "http://symfony.com"
+    },
+    {
         "name": "doctrine/mongodb",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "source": {
             "type": "git",
             "url": "https://github.com/doctrine/mongodb",
-            "reference": "1d5b2eec0a970bcdae36f4a9b275ccff1f24f6f7"
+            "reference": "27f5d6fa6cbf9bbfaa2c56c5618ffc26476fc399"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/doctrine/mongodb/zipball/1d5b2eec0a970bcdae36f4a9b275ccff1f24f6f7",
-            "reference": "1d5b2eec0a970bcdae36f4a9b275ccff1f24f6f7",
+            "url": "https://github.com/doctrine/mongodb/zipball/27f5d6fa6cbf9bbfaa2c56c5618ffc26476fc399",
+            "reference": "27f5d6fa6cbf9bbfaa2c56c5618ffc26476fc399",
             "shasum": ""
         },
         "require": {
@@ -276,7 +394,7 @@
             "symfony/console": ">=2.0,<2.2-dev",
             "doctrine/common": ">=2.1.0,<2.5-dev"
         },
-        "time": "2012-09-13 00:50:18",
+        "time": "2012-09-29 21:59:33",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -323,12 +441,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/doctrine/mongodb-odm.git",
-            "reference": "76a75f24e125fd01640c151710e2809059dc814a"
+            "reference": "4a5457eb713b12d6124db9817c634533d8018044"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/doctrine/mongodb-odm/zipball/76a75f24e125fd01640c151710e2809059dc814a",
-            "reference": "76a75f24e125fd01640c151710e2809059dc814a",
+            "url": "https://github.com/doctrine/mongodb-odm/zipball/4a5457eb713b12d6124db9817c634533d8018044",
+            "reference": "4a5457eb713b12d6124db9817c634533d8018044",
             "shasum": ""
         },
         "require": {
@@ -338,7 +456,7 @@
             "symfony/console": ">=2.0-dev,<2.2-dev",
             "doctrine/mongodb": ">=1.0.0-beta1,<1.1-dev"
         },
-        "time": "2012-09-13 00:48:50",
+        "time": "2012-09-29 23:42:42",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -378,80 +496,25 @@
         ]
     },
     {
-        "name": "opauth/opauth",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "git://github.com/uzyn/opauth.git",
-            "reference": "8b4f52b0278a64b8944024ea5b38d28b6ea20481"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/uzyn/opauth/zipball/8b4f52b0278a64b8944024ea5b38d28b6ea20481",
-            "reference": "8b4f52b0278a64b8944024ea5b38d28b6ea20481",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.2.0"
-        },
-        "suggest": {
-            "opauth/facebook": "Allows Facebook authentication",
-            "opauth/google": "Allows Google authentication",
-            "opauth/twitter": "Allows Twitter authentication"
-        },
-        "time": "2012-08-29 09:42:11",
-        "type": "library",
-        "installation-source": "source",
-        "autoload": {
-            "psr-0": {
-                "": "lib/Opauth/",
-                "Opauth": "lib/"
-            }
-        },
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "U-Zyn Chua",
-                "email": "chua@uzyn.com",
-                "homepage": "http://uzyn.com"
-            }
-        ],
-        "description": "Multi-provider authentication framework for PHP",
-        "homepage": "http://opauth.org",
-        "keywords": [
-            "OpenId",
-            "Authentication",
-            "oauth",
-            "twitter",
-            "google",
-            "facebook",
-            "auth",
-            "omniauth"
-        ]
-    },
-    {
         "name": "opauth/facebook",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "source": {
             "type": "git",
             "url": "git://github.com/uzyn/opauth-facebook.git",
-            "reference": "e5f29ab9c169234120babe5be5ef529cd88a92d9"
+            "reference": "0.2.1"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/uzyn/opauth-facebook/zipball/e5f29ab9c169234120babe5be5ef529cd88a92d9",
-            "reference": "e5f29ab9c169234120babe5be5ef529cd88a92d9",
+            "url": "https://github.com/uzyn/opauth-facebook/zipball/0.2.1",
+            "reference": "0.2.1",
             "shasum": ""
         },
         "require": {
             "php": ">=5.2.0",
             "opauth/opauth": ">=0.2.0"
         },
-        "time": "2012-07-18 06:44:50",
+        "time": "2012-09-21 04:47:35",
         "type": "library",
         "installation-source": "source",
         "autoload": {
@@ -478,96 +541,6 @@
         ]
     },
     {
-        "name": "opauth/google",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "git://github.com/uzyn/opauth-google.git",
-            "reference": "0.2.1"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/uzyn/opauth-google/zipball/0.2.1",
-            "reference": "0.2.1",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.2.0",
-            "opauth/opauth": ">=0.2.0"
-        },
-        "time": "2012-09-10 20:35:04",
-        "type": "library",
-        "installation-source": "source",
-        "autoload": {
-            "psr-0": {
-                "": "."
-            }
-        },
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "U-Zyn Chua",
-                "email": "chua@uzyn.com",
-                "homepage": "http://uzyn.com"
-            }
-        ],
-        "description": "Google strategy for Opauth",
-        "homepage": "http://opauth.org",
-        "keywords": [
-            "Authentication",
-            "google",
-            "auth"
-        ]
-    },
-    {
-        "name": "opauth/twitter",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "git://github.com/uzyn/opauth-twitter.git",
-            "reference": "14f19113057121df957e76b9f07ffa750f060263"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/uzyn/opauth-twitter/zipball/14f19113057121df957e76b9f07ffa750f060263",
-            "reference": "14f19113057121df957e76b9f07ffa750f060263",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.2.0",
-            "opauth/opauth": ">=0.2.0"
-        },
-        "time": "2012-09-11 06:22:15",
-        "type": "library",
-        "installation-source": "source",
-        "autoload": {
-            "psr-0": {
-                "": "."
-            }
-        },
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "U-Zyn Chua",
-                "email": "chua@uzyn.com",
-                "homepage": "http://uzyn.com"
-            }
-        ],
-        "description": "Twitter strategy for Opauth",
-        "homepage": "http://opauth.org",
-        "keywords": [
-            "Authentication",
-            "twitter",
-            "auth"
-        ]
-    },
-    {
         "name": "symfony/http-kernel",
         "version": "2.1.x-dev",
         "version_normalized": "2.1.9999999.9999999-dev",
@@ -575,12 +548,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/HttpKernel",
-            "reference": "52820d9f3b80e3b8d31aba53bb792ec25894e092"
+            "reference": "404dce298803bb617ac24967ba07a3cc8e38bef3"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/symfony/HttpKernel/zipball/52820d9f3b80e3b8d31aba53bb792ec25894e092",
-            "reference": "52820d9f3b80e3b8d31aba53bb792ec25894e092",
+            "url": "https://github.com/symfony/HttpKernel/zipball/404dce298803bb617ac24967ba07a3cc8e38bef3",
+            "reference": "404dce298803bb617ac24967ba07a3cc8e38bef3",
             "shasum": ""
         },
         "require": {
@@ -606,7 +579,7 @@
             "symfony/dependency-injection": "2.1.*",
             "symfony/finder": "2.1.*"
         },
-        "time": "2012-09-17 14:41:57",
+        "time": "2012-09-28 17:25:05",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -642,12 +615,12 @@
         "source": {
             "type": "git",
             "url": "git://github.com/fabpot/Silex.git",
-            "reference": "66204d6be73f472762632df5cc0a6853e730d77b"
+            "reference": "810fcb19c74317289d06b531641cf5dd33f7bf6f"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/fabpot/Silex/zipball/66204d6be73f472762632df5cc0a6853e730d77b",
-            "reference": "66204d6be73f472762632df5cc0a6853e730d77b",
+            "url": "https://github.com/fabpot/Silex/zipball/810fcb19c74317289d06b531641cf5dd33f7bf6f",
+            "reference": "810fcb19c74317289d06b531641cf5dd33f7bf6f",
             "shasum": ""
         },
         "require": {
@@ -674,18 +647,18 @@
             "symfony/locale": "2.1.*",
             "twig/twig": ">=1.8.0,<2.0-dev",
             "swiftmailer/swiftmailer": "4.2.*",
-            "doctrine/dbal": "2.2.*"
+            "doctrine/dbal": ">=2.2.0,<2.4.0-dev"
         },
         "suggest": {
             "symfony/browser-kit": "2.1.*",
             "symfony/css-selector": "2.1.*",
             "symfony/dom-crawler": "2.1.*"
         },
-        "time": "2012-09-18 06:41:29",
+        "time": "2012-09-28 12:55:14",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.0-dev"
+                "dev-master": "1.0.x-dev"
             }
         },
         "installation-source": "source",
@@ -722,12 +695,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/Validator",
-            "reference": "5e06bbdcbbadfd946cb3a5f231c0c1bf40ff1b36"
+            "reference": "4e24059efc3ae05c9f34aa123667b3734e5cd3cc"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/symfony/Validator/zipball/5e06bbdcbbadfd946cb3a5f231c0c1bf40ff1b36",
-            "reference": "5e06bbdcbbadfd946cb3a5f231c0c1bf40ff1b36",
+            "url": "https://github.com/symfony/Validator/zipball/4e24059efc3ae05c9f34aa123667b3734e5cd3cc",
+            "reference": "4e24059efc3ae05c9f34aa123667b3734e5cd3cc",
             "shasum": ""
         },
         "require": {
@@ -743,7 +716,7 @@
             "symfony/http-foundation": "2.1.*",
             "symfony/yaml": "2.1.*"
         },
-        "time": "2012-09-17 11:45:59",
+        "time": "2012-09-27 12:14:35",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -780,18 +753,18 @@
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/OptionsResolver",
-            "reference": "v2.1.1"
+            "reference": "v2.1.0-RC2"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/symfony/OptionsResolver/zipball/v2.1.1",
-            "reference": "v2.1.1",
+            "url": "https://github.com/symfony/OptionsResolver/zipball/v2.1.0-RC2",
+            "reference": "v2.1.0-RC2",
             "shasum": ""
         },
         "require": {
             "php": ">=5.3.3"
         },
-        "time": "2012-08-22 07:48:41",
+        "time": "2012-08-22 13:48:41",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -833,7 +806,7 @@
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/Routing",
-            "reference": "v2.1.1"
+            "reference": "v2.1.2"
         },
         "dist": {
             "type": "zip",
@@ -855,7 +828,7 @@
             "symfony/config": "2.1.*",
             "symfony/yaml": "2.1.*"
         },
-        "time": "2012-09-10 06:53:42",
+        "time": "2012-09-10 10:53:42",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -892,18 +865,18 @@
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/HttpFoundation",
-            "reference": "v2.1.1"
+            "reference": "c6d48206a04fc2aa75d396bb23f0152f33eaab0c"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/symfony/HttpFoundation/zipball/386a332456060076778ba8e6b84bed0480eaa69c",
-            "reference": "386a332456060076778ba8e6b84bed0480eaa69c",
+            "url": "https://github.com/symfony/HttpFoundation/zipball/c6d48206a04fc2aa75d396bb23f0152f33eaab0c",
+            "reference": "c6d48206a04fc2aa75d396bb23f0152f33eaab0c",
             "shasum": ""
         },
         "require": {
             "php": ">=5.3.3"
         },
-        "time": "2012-09-21 02:13:47",
+        "time": "2012-09-29 16:56:30",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -914,7 +887,7 @@
         "autoload": {
             "psr-0": {
                 "Symfony\\Component\\HttpFoundation": "",
-                "SessionHandlerInterface": "Symfony/Component/HttpFoundation/Resources/stubs"
+                "SessionHandlerInterface": "Resources/stubs"
             }
         },
         "license": [
@@ -941,7 +914,7 @@
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/EventDispatcher",
-            "reference": "v2.1.1"
+            "reference": "v2.1.2"
         },
         "dist": {
             "type": "zip",
@@ -959,7 +932,7 @@
             "symfony/dependency-injection": "2.1.*",
             "symfony/http-kernel": "2.1.*"
         },
-        "time": "2012-09-10 06:53:42",
+        "time": "2012-09-10 10:53:42",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -995,7 +968,7 @@
         "source": {
             "type": "git",
             "url": "https://github.com/Seldaek/monolog",
-            "reference": "0f3dc95c4a0ed7d17bec237d07af3da6c0c1071a"
+            "reference": "09b3a80cfaf3e323e348a5e817afeee98d5e6b48"
         },
         "dist": {
             "type": "zip",
@@ -1014,7 +987,7 @@
             "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
             "ext-mongo": "Allow sending log messages to a MongoDB server"
         },
-        "time": "2012-09-18 11:50:48",
+        "time": "2012-09-18 15:50:48",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1053,7 +1026,7 @@
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/Security",
-            "reference": "v2.1.1"
+            "reference": "v2.1.2"
         },
         "dist": {
             "type": "zip",
@@ -1082,7 +1055,7 @@
             "symfony/validator": "2.1.*",
             "symfony/routing": "2.1.*"
         },
-        "time": "2012-09-10 06:53:42",
+        "time": "2012-09-10 10:53:42",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1119,12 +1092,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/Translation",
-            "reference": "v2.1.1"
+            "reference": "4fea82d0765c03026c174231c220b50e251fc322"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/symfony/Translation/zipball/v2.1.2",
-            "reference": "v2.1.2",
+            "url": "https://github.com/symfony/Translation/zipball/4fea82d0765c03026c174231c220b50e251fc322",
+            "reference": "4fea82d0765c03026c174231c220b50e251fc322",
             "shasum": ""
         },
         "require": {
@@ -1138,7 +1111,7 @@
             "symfony/config": "2.1.*",
             "symfony/yaml": "2.1.*"
         },
-        "time": "2012-09-10 06:53:42",
+        "time": "2012-09-28 14:32:18",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1175,12 +1148,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/Locale",
-            "reference": "v2.1.0-RC2"
+            "reference": "cf81735de00ea35258f2ceb22cf3bfa95456d530"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/symfony/Locale/zipball/v2.1.2",
-            "reference": "v2.1.2",
+            "url": "https://github.com/symfony/Locale/zipball/cf81735de00ea35258f2ceb22cf3bfa95456d530",
+            "reference": "cf81735de00ea35258f2ceb22cf3bfa95456d530",
             "shasum": ""
         },
         "require": {
@@ -1189,7 +1162,7 @@
         "suggest": {
             "ext-intl": ">=5.3.3"
         },
-        "time": "2012-08-22 09:48:41",
+        "time": "2012-09-27 12:25:23",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1226,12 +1199,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/Form",
-            "reference": "v2.1.1"
+            "reference": "39eb3e766230c0549e534a3c4940107b650c0e28"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/symfony/Form/zipball/v2.1.2",
-            "reference": "v2.1.2",
+            "url": "https://github.com/symfony/Form/zipball/39eb3e766230c0549e534a3c4940107b650c0e28",
+            "reference": "39eb3e766230c0549e534a3c4940107b650c0e28",
             "shasum": ""
         },
         "require": {
@@ -1248,7 +1221,7 @@
             "symfony/validator": "2.1.*",
             "symfony/http-foundation": "2.1.*"
         },
-        "time": "2012-09-19 02:13:43",
+        "time": "2012-09-25 18:53:31",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1276,5 +1249,75 @@
         ],
         "description": "Symfony Form Component",
         "homepage": "http://symfony.com"
+    },
+    {
+        "name": "doctrine/common",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/doctrine/common",
+            "reference": "3aa91a12f216ebf7c452b9bf408ad4463c334a5e"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/doctrine/common/zipball/3aa91a12f216ebf7c452b9bf408ad4463c334a5e",
+            "reference": "3aa91a12f216ebf7c452b9bf408ad4463c334a5e",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.2"
+        },
+        "time": "2012-09-28 08:02:26",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.4.x-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "Doctrine\\Common\\": "lib/"
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Jonathan Wage",
+                "email": "jonwage@gmail.com",
+                "homepage": "http://www.jwage.com/"
+            },
+            {
+                "name": "Guilherme Blanco",
+                "email": "guilhermeblanco@gmail.com",
+                "homepage": "http://www.instaclick.com"
+            },
+            {
+                "name": "Roman Borschel",
+                "email": "roman@code-factory.org"
+            },
+            {
+                "name": "Benjamin Eberlei",
+                "email": "kontakt@beberlei.de"
+            },
+            {
+                "name": "Johannes Schmitt",
+                "email": "schmittjoh@gmail.com",
+                "homepage": "https://github.com/schmittjoh",
+                "role": "Developer of wrapped JMSSerializerBundle"
+            }
+        ],
+        "description": "Common Library for Doctrine projects",
+        "homepage": "http://www.doctrine-project.org",
+        "keywords": [
+            "collections",
+            "spl",
+            "eventmanager",
+            "annotations",
+            "persistence"
+        ]
     }
 ]

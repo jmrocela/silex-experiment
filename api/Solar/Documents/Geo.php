@@ -1,5 +1,0 @@
-CRUD
-
-SEARCH
-
-CHECKIN

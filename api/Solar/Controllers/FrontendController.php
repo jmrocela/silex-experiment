@@ -13,21 +13,20 @@ class FrontendController extends Controller
 	public function __construct(Application $app)
 	{
 		parent::__construct($app);
+		$this->addWidget('testbox', new Widgets\IndexWidget(array('test' => 1)));
 	}
 
 	public function index()
 	{
-		$this->addWidget('testbox', new Widgets\IndexWidget(array('test' => 1)));
-	
 		return array();
 	}
 
-	public function about()
+	public function company()
 	{
 		return array();
 	}
 
-	public function features()
+	public function brag()
 	{
 		return array();
 	}
@@ -37,7 +36,7 @@ class FrontendController extends Controller
 		return array();
 	}
 
-	public function press()
+	public function help()
 	{
 		return array();
 	}
@@ -52,7 +51,12 @@ class FrontendController extends Controller
 		return array();
 	}
 
-	public function fourohfour()
+	public function careers()
+	{
+		return array();
+	}
+
+	public function error($code)
 	{
 
 	}
