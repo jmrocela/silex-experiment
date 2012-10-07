@@ -57,6 +57,12 @@ $app->register(new Silex\Provider\MonologServiceProvider(), array(
     ));
 
 /**
+ * register our form forms
+ */
+$app->register(new Silex\Provider\ValidatorServiceProvider());
+$app->register(new Silex\Provider\FormServiceProvider());
+
+/**
  * register our url_generator
  */
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());

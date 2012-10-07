@@ -21,12 +21,12 @@ return array(
 				//array('pattern' => '/careers/', 'path' => 'Frontend/careers', 'layout' => 'generic'),
 				
 				// secure pages
-				array('pattern' => '/secure/signup/', 'path' => 'User/signup', 'layout' => 'user', 'name' => 'register'),
-				array('pattern' => '/secure/login/', 'path' => 'User/login', 'layout' => 'user', 'name' => 'login'),
-				array('pattern' => '/secure/activate/', 'path' => 'User/activate', 'layout' => 'user'),
-				array('pattern' => '/secure/reset/', 'path' => 'User/reset', 'layout' => 'user'),
-				array('pattern' => '/secure/logout/', 'path' => 'User/logout', 'layout' => 'user'),
-				array('pattern' => '/secure/process/{where}', 'path' => 'User/process', 'layout' => 'new_user'),
+				array('pattern' => '/secure/signup/', 'secure' => true, 'path' => 'User/signup', 'layout' => 'secure', 'name' => 'register'),
+				array('pattern' => '/secure/login/', 'secure' => true, 'path' => 'User/login', 'layout' => 'secure', 'name' => 'login'),
+				array('pattern' => '/secure/activate/', 'secure' => true, 'path' => 'User/activate'),
+				array('pattern' => '/secure/reset/', 'secure' => true, 'path' => 'User/reset', 'layout' => 'secure'),
+				array('pattern' => '/secure/logout/', 'secure' => true, 'path' => 'User/logout', 'layout' => 'secure'),
+				array('pattern' => '/secure/process/{where}', 'secure' => true, 'path' => 'User/process', 'layout' => 'new_user'),
 				
 				// advanced search
 				array('pattern' => '/search/', 'path' => 'Search/index'),

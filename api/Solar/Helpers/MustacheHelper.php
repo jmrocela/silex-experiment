@@ -37,7 +37,7 @@ class MustacheHelper extends \ArrayObject {
     public function link_to($text) 
     {
         if ($generated = $this->generator->generate($text)) {
-            return $this->link($generated);
+            return $generated;
         }
 
         return $text;

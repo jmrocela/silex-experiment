@@ -52,6 +52,9 @@ foreach ($routes as $site => $handles) {
 			// bind the route to a name so we can call it easily later
 			$name = (isset($route['name'])) ? $route['name']: str_replace(array('/', '{', '}'), '_', strtolower($route['pattern']));
 			
+			// see if the route requires HTTPS or not
+			$secure = (isset($route['secure']) && $route['secure'] == TRUE) ? 'https': 'http';
+
 			// let's set the layout
 			$route['layout'] = (isset($route['layout'])) ? $route['layout']: 'default';
 		    
@@ -86,6 +89,7 @@ foreach ($routes as $site => $handles) {
 				}
 		    })
 		    ->before(function(Request $request) use ($app, $route) {
+
 				// prepare the names and method
 				$controller = explode('/', $route['path']);
 				$route_handle = 'Solar\\Controllers\\' . $controller[0] . 'Controller';
@@ -152,6 +156,7 @@ foreach ($routes as $site => $handles) {
 				return $param;
 		    })
 		    ->bind($name)
+		    ->setRequirement('_scheme', $secure)
 			->method($method);
 		} 
 		

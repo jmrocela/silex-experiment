@@ -25,6 +25,8 @@ class Controller {
 	
 	private $widgets = array();
 
+	private $request = null;
+
 	public function __construct(Application $app)
 	{		
 		// inject this context with required stuff from the app object
@@ -47,6 +49,7 @@ class Controller {
 
 	public function before(Request $request)
 	{
+		$this->request = $request;
 		return $request;
 	}
 
@@ -84,6 +87,8 @@ class Controller {
 		$target->log = $with['monolog'];
 		$target->mongo = $with['mongo'];
 		$target->view = $with['view'];
+		$target->validator = $with['validator'];
+		$target->csrf = $with['form.csrf_provider'];
 		return $target;
 	}
 

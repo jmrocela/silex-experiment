@@ -1,4 +1,4 @@
-
+{{%DOT-NOTATION}}
 <!DOCTYPE html>
 <!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]-->
 <!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]-->
@@ -10,11 +10,10 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width">
   <title>Sprintport. Make Travel Social.</title>
+  <script type="text/javascript">
+	var widgets = [];
+  </script>
 <body>
-
-
-Just for the Homepage
-
-
+{{body}}
 </body>
 </html>
